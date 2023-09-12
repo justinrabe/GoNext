@@ -1,3 +1,6 @@
+import boto3
+def 
+
 def calculate_elo_rating(team1_elo, team2_elo, outcome):
     k = 32  # Elo update factor, can be adjusted
     expected_team1 = 1 / (1 + 10**((team2_elo - team1_elo) / 400))
@@ -15,4 +18,7 @@ def calculate_elo_rating(team1_elo, team2_elo, outcome):
 if __name__ == '__main__':
 
     print(calculate_elo_rating(1000,1000, 'win'))
-    print('debug')
+
+## Every team starts at a base elo of 1000
+## for each game in tournament, call calculate_elo_rating. save both teams elo and store a concurrently updating list of teams and elos.
+## Once the loop per tournament is finished, return the list of teams and elos, ordered by elo.

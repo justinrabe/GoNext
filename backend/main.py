@@ -1,5 +1,8 @@
 import boto3
-def 
+import pandas
+import numpy
+def connect_to_athena():
+
 
 def calculate_elo_rating(team1_elo, team2_elo, outcome):
     k = 32  # Elo update factor, can be adjusted

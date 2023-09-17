@@ -1,7 +1,17 @@
 import boto3
 import pandas
 import numpy
-def connect_to_athena():
+def connect_to_athena(region_name, aws_access_key_id, aws_secret_access_key, aws_session_token=None):
+
+    session = boto3.Session(
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+        aws_session_token=aws_session_token,
+        region_name=region_name
+    )
+
+    athena = session.client('athena')
+    return athena
 
 
 def calculate_elo_rating(team1_elo, team2_elo, outcome):
@@ -19,8 +29,13 @@ def calculate_elo_rating(team1_elo, team2_elo, outcome):
     return new_team1_elo, new_team2_elo
 
 if __name__ == '__main__':
-
+    region_name = 'us-west-1'
+    aws_access_key_id = 'fake_access_key'
+    aws_secret_access_key = 'your_secret_access_key'
+    database = 'lol'
+    output_location = 's3://your-s3-bucket/query-results/'
     print(calculate_elo_rating(1000,1000, 'win'))
+    athena = connect_to_athena(region_name, aws_access_key_id, aws_secret_access_key)
 
 ## Every team starts at a base elo of 1000
 ## for each game in tournament, call calculate_elo_rating. save both teams elo and store a concurrently updating list of teams and elos.

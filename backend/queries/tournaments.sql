@@ -1,3 +1,15 @@
-SELECT t.stages[1].sections[1]
-FROM tournaments t
-WHERE slug = 'msi_2023'
+
+
+SELECT tournaments.slug, 
+stagers.name, 
+stagers.slug, 
+sec.name, 
+matchers.id,
+stagers.sections
+FROM tournaments, 
+UNNEST(stages) t (stagers), 
+UNNEST(stagers.sections) u (sec),
+UNNEST(sec.matches) m (matchers)
+
+WHERE tournaments.slug = 'msi_2023'
+LIMIT 10

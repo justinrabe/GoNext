@@ -1,11 +1,11 @@
+import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 
-function App() {
+export default function App() {
 	return (
 		<div>
 			<Navbar />
+			<Hero />
 		</div>
 	);
 }
-
-export default App;

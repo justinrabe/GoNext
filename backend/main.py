@@ -2,6 +2,7 @@ import boto3
 import pandas
 import numpy
 import os
+import team
 def connect_to_athena(region_name, aws_access_key_id, aws_secret_access_key, aws_session_token=None):
 
     session = boto3.Session(

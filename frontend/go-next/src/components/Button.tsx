@@ -1,6 +1,6 @@
 export default function Button({ children }) {
 	return (
-		<button className='bg-teal uppercase py-2 px-4 rounded text-white'>
+		<button className='bg-teal uppercase py-2 px-4 rounded text-white font-bold'>
 			{children}
 		</button>
 	);

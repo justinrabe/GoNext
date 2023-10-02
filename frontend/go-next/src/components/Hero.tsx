@@ -4,10 +4,10 @@ export default function Hero() {
 	return (
 		<div className=' flex w-full bg-blue5'>
 			<div className='w-[50%] flex flex-col items-center justify-center text-white gap-4'>
-				<h1 className='uppercase text-gold4'>
+				<h1 className='uppercase text-gold4 font-display font-medium'>
 					Technical Documentation
 				</h1>
-				<h2 className='uppercase text-2xl italic'>
+				<h2 className='uppercase text-2xl italic font-display font-medium'>
 					View Public LOL Esports Data
 				</h2>
 				<p className='text-center leading-6 tracking-[0.16px] mx-[7.5em]'>

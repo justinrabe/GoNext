@@ -10,6 +10,11 @@ export default {
 				gold4: '#C89B3C',
 				teal: '#0497AB',
 			},
+
+			fontFamily: {
+				sans: ['Spiegel', 'sans-serif'],
+				display: ['BeaufortForLOL', 'display'],
+			},
 		},
 	},
 	plugins: [],

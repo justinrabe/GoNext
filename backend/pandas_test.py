@@ -2,7 +2,10 @@ import pandas as pd
 import json
 import team
 
-teams_in_tournament = []
+teams_in_tournament = {}
+
+with open("esports-data/teams.json", "r") as json_file:
+        teams_data = json.load(json_file)
 
 def tournament_rankings(tournament):
     with open("esports-data/tournaments.json", "r") as json_file:
@@ -15,7 +18,7 @@ def tournament_rankings(tournament):
     # print(df)
     to_df = pd.DataFrame(tournaments_data)
     filtered_tournament = to_df[to_df["slug"] == tournament]
-    print(filtered_tournament)
+    ##print(filtered_tournament)
     for stage in filtered_tournament["stages"]:
         stage = pd.DataFrame(stage)
         for section in stage["sections"]:
@@ -27,14 +30,29 @@ def tournament_rankings(tournament):
                 for game in match["games"]:
                     game = pd.DataFrame(game)
                     ##print(game)
+                    blue_team = None
+                    red_team = None
                     for team in game["teams"]:
-                        print(team)
+                        blue_team = team[0]
+                        red_team = team[1]
+                        blue_team_name = get_team(blue_team["id"])["name"]
+                        if blue_team_name not in teams_in_tournament:
+                            teams_in_tournament[blue_team_name] = 1000
 
+                        red_team_name = get_team(red_team["id"])["name"]
+                        if red_team_name not in teams_in_tournament:
+                            teams_in_tournament[red_team_name] = 1000
+
+                        
                             ##elo rating formula
                             ##save elo to elo data structure
                             ##to-do create elo data structure from all teams
     # [print(i) for i in teams_in_tournament]
+    print (teams_in_tournament)
 
+def get_team(id):
+    output = [t for t in teams_data if t['team_id'] == str(id)]
+    return output[0]
                          
 
-tournament_rankings("nacl_qualifiers_2_summer_2023")
+tournament_rankings("lcs_spring_2023")

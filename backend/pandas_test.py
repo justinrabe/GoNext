@@ -4,6 +4,27 @@ import team
 
 teams_in_tournament = {}
 
+stages_k = {
+"Groups" : 16,
+"knockouts" : 8, 
+"Regular Season" : 16, 
+"Playoffs" : 32, 
+"Regional Finals" : 32, 
+"Round 1" : 4, 
+"Round 2" : 8, 
+"Knockouts" : 4, 
+"promotion" : 2, 
+"Regional Qualifier" : 2, 
+"Play In Groups" : 8, 
+"Play In Knockouts" : 8, 
+"Promotion Series" : 2, 
+"regional_qualifier" : 2, 
+"Bracket Stage" : 8, 
+"play_in_knockouts" : 8,
+"east" : 2, 
+"west" : 2
+}
+
 with open("esports-data/teams.json", "r") as json_file:
         teams_data = json.load(json_file)
 
@@ -21,15 +42,21 @@ def tournament_rankings(tournament):
     ##print(filtered_tournament)
     for stage in filtered_tournament["stages"]:
         stage = pd.DataFrame(stage)
+        # print(stage["name"])
+        # print()
+        # print(stage["name"][0])
+        # k = stages_k["Regular Season"]
+        # print(k)
         for section in stage["sections"]:
-            # print(section)
+            
             # print(type(section))
             section = pd.DataFrame(section)
+            # print(section)
             for match in section["matches"]:
                 match = pd.DataFrame(match)
                 for game in match["games"]:
                     game = pd.DataFrame(game)
-                    ##print(game)
+                    k = stages_k[section["name"].to_string(index=False)]
                     blue_team = None
                     red_team = None
                     for team in game["teams"]:
@@ -47,13 +74,14 @@ def tournament_rankings(tournament):
 
                         ## Blue Team wins
                         if (team[0]["result"]["outcome"] == "win"):
-                            blue_new_elo = calculate_elo_rating(teams_in_tournament[blue_team_name], teams_in_tournament[red_team_name], 1)
-                            red_new_elo = calculate_elo_rating(teams_in_tournament[red_team_name], teams_in_tournament[blue_team_name], 0)
+                            blue_new_elo = calculate_elo_rating(teams_in_tournament[blue_team_name], teams_in_tournament[red_team_name], 1, k)
+                            red_new_elo = calculate_elo_rating(teams_in_tournament[red_team_name], teams_in_tournament[blue_team_name], 0, k)
                             teams_in_tournament[blue_team_name] = blue_new_elo
                             teams_in_tournament[red_team_name] = red_new_elo
+                        ## Red Team wins
                         elif (team[0]["result"]["outcome"] == "lose"):
-                            blue_new_elo = calculate_elo_rating(teams_in_tournament[blue_team_name], teams_in_tournament[red_team_name], 0)
-                            red_new_elo = calculate_elo_rating(teams_in_tournament[red_team_name], teams_in_tournament[blue_team_name], 1)
+                            blue_new_elo = calculate_elo_rating(teams_in_tournament[blue_team_name], teams_in_tournament[red_team_name], 0, k)
+                            red_new_elo = calculate_elo_rating(teams_in_tournament[red_team_name], teams_in_tournament[blue_team_name], 1, k)
                             teams_in_tournament[blue_team_name] = blue_new_elo
                             teams_in_tournament[red_team_name] = red_new_elo
 
@@ -82,4 +110,4 @@ def calculate_elo_rating(player_rating, opponent_rating, outcome, k=32):
     return new_rating
 
 
-tournament_rankings("lcs_spring_2023")
+tournament_rankings("lck_spring_2023")

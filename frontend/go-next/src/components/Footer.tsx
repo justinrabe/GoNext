@@ -3,10 +3,14 @@ import Button from './Button';
 export default function Footer() {
 	return (
 		<footer className='w-full bg-black text-white px-[3.75rem] py-10'>
-			<h1 className='text-gold4'>Ranking Updates</h1>
+			<h1 className='uppercase text-gold4 font-display font-medium'>
+				Ranking Updates
+			</h1>
 			<div className='flex justify-between'>
 				<div>
-					<h1 className='text-2xl italic'>Stay Ahead of the Game</h1>
+					<h1 className='text-2xl italic font-display font-medium uppercase'>
+						Stay Ahead of the Game
+					</h1>
 					<h2>
 						Get exclusive updates on GO NEXT Power Rankings and
 						more.
@@ -28,15 +32,15 @@ export default function Footer() {
 			{/* Link section */}
 			<div className='flex flex-start gap-6'>
 				<div className='flex flex-col w-[17rem]'>
-					<h1 className='font-medium'>GO NEXT</h1>
+					<h1 className='font-semibold'>GO NEXT</h1>
 					<a href='#'>Meet the Team</a>
 				</div>
 				<div className='flex flex-col w-[17rem]'>
-					<h1 className='font-medium'>Products</h1>
+					<h1 className='font-semibold'>Products</h1>
 					<a href='#'>LoL Power Rankings</a>
 				</div>
 				<div className='flex flex-col w-[17rem]'>
-					<h1 className='font-medium'>Resources</h1>
+					<h1 className='font-semibold'>Resources</h1>
 					<a href='#'>Technical Documentation</a>
 					<a href='#'>Source Code</a>
 				</div>

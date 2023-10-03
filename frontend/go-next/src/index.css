@@ -1,3 +1,143 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Spiegel Bold */
+@font-face {
+	font-family: 'Spiegel';
+	src: url('/fonts/Spiegel-TTF/Spiegel_TT_Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+/* Spiegel Bold Italic */
+@font-face {
+	font-family: 'Spiegel';
+	src: url('/fonts/Spiegel-TTF/Spiegel_TT_Bold_Italic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* Spiegel Regular */
+@font-face {
+	font-family: 'Spiegel';
+	src: url('/fonts/Spiegel-TTF/Spiegel_TT_Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Spiegel Regular Italic */
+@font-face {
+	font-family: 'Spiegel';
+	src: url('/fonts/Spiegel-TTF/Spiegel_TT_Regular_Italic.ttf')
+		format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+/* Spiegel Semibold */
+@font-face {
+	font-family: 'Spiegel';
+	src: url('/fonts/Spiegel-TTF/Spiegel_TT_SemiBold.ttf') format('truetype');
+	font-weight: 600; /* or whatever is the closest to semibold in your font */
+	font-style: normal;
+}
+
+/* Spiegel Semibold Italic */
+@font-face {
+	font-family: 'Spiegel';
+	src: url('/fonts/Spiegel-TTF/Spiegel_TT_SemiBold_Italic.ttf')
+		format('truetype');
+	font-weight: 600; /* or whatever is the closest to semibold in your font */
+	font-style: italic;
+}
+
+/* BeaufortForLOL Bold */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Bold.ttf')
+		format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+/* BeaufortForLOL Bold Italic */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-BoldItalic.ttf')
+		format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* BeaufortForLOL Heavy */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Heavy.ttf')
+		format('truetype');
+	font-weight: 900; /* 'heavy' is often mapped to 900 in font-weight */
+	font-style: normal;
+}
+
+/* BeaufortForLOL Heavy Italic */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-HeavyItalic.ttf')
+		format('truetype');
+	font-weight: 900;
+	font-style: italic;
+}
+
+/* BeaufortForLOL Italic */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Italic.ttf')
+		format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+/* BeaufortForLOL Light */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Light.ttf')
+		format('truetype');
+	font-weight: 300; /* 'light' is often mapped to 300 in font-weight */
+	font-style: normal;
+}
+
+/* BeaufortForLOL Light Italic */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-LightItalic.ttf')
+		format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+/* BeaufortForLOL Medium */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Medium.ttf')
+		format('truetype');
+	font-weight: 500; /* 'medium' is often mapped to 500 in font-weight */
+	font-style: normal;
+}
+
+/* BeaufortForLOL Medium Italic */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-MediumItalic.ttf')
+		format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+/* BeaufortForLOL Regular */
+@font-face {
+	font-family: 'BeaufortForLOL';
+	src: url('/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Regular.ttf')
+		format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}

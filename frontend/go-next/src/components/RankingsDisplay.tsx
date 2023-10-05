@@ -5,14 +5,8 @@ import {
   createColumnHelper,
 } from '@tanstack/react-table';
 import { useState } from 'react';
-
-type Team = {
-  id: string;
-  team_name: string;
-  rank: number;
-  region: null;
-  elo: number;
-};
+import Dropdown from './Dropdown';
+import { Team, Tournament } from '../types';
 
 const sampleData: Team[] = [
   {
@@ -87,6 +81,21 @@ const sampleData: Team[] = [
   },
 ];
 
+const tournamentOptions: Tournament[] = [
+  {
+    name: 'LPL Spring 2023',
+    dateStart: new Date(),
+    dateEnd: new Date(),
+    id: '1234',
+  },
+  {
+    name: 'LCK Spring 2023',
+    dateStart: new Date(),
+    dateEnd: new Date(),
+    id: '5678',
+  },
+];
+
 const columnHelper = createColumnHelper<Team>();
 const columns = [
   columnHelper.accessor('rank', {
@@ -116,12 +125,13 @@ export default function RankingsDisplay() {
   });
 
   const evenRowBg = (index: number): string => {
-    return index % 2 == 0 ? 'bg-gold1 border border-gold2' : 'bg-white';
+    return index % 2 == 0 ? 'bg-white' : 'bg-gold1 border border-gold2';
   };
 
   return (
     <div className='bg-marble w-full bg-cover px-[60px] pb-[58px] pt-[58px]'>
-      <table className='font-spiegel w-full text-left'>
+      <Dropdown buttonName={'Tournaments'} options={tournamentOptions} />
+      <table className='w-full text-left font-sans'>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

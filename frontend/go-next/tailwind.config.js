@@ -10,6 +10,8 @@ export default {
         black: '#081428',
         grey: '#AEB3B7',
         blue5: '#0A323C',
+        gold1: '#F6EFE0',
+        gold2: '#D1C09C',
         gold4: '#C89B3C',
         teal: '#0497AB',
       },

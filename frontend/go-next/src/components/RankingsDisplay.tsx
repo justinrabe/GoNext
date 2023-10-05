@@ -1,4 +1,20 @@
-const sampleData = [
+import {
+  getCoreRowModel,
+  useReactTable,
+  flexRender,
+  createColumnHelper,
+} from '@tanstack/react-table';
+import { useState } from 'react';
+
+type Team = {
+  id: string;
+  team_name: string;
+  rank: number;
+  region: null;
+  elo: number;
+};
+
+const sampleData: Team[] = [
   {
     id: '98767991877340524',
     team_name: 'Cloud9',
@@ -71,14 +87,69 @@ const sampleData = [
   },
 ];
 
+const columnHelper = createColumnHelper<Team>();
+const columns = [
+  columnHelper.accessor('rank', {
+    header: 'Rank',
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor('team_name', {
+    header: 'Team',
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor('region', {
+    header: 'Region',
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor('elo', {
+    header: 'ELO',
+    cell: (info) => Math.floor(info.getValue()),
+  }),
+];
+
 export default function RankingsDisplay() {
+  const [data, setData] = useState(() => [...sampleData]);
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
+  const evenRowBg = (index: number): string => {
+    return index % 2 == 0 ? 'bg-gold1 border border-gold2' : 'bg-white';
+  };
+
   return (
     <div className='bg-marble w-full bg-cover px-[60px] pb-[58px] pt-[58px]'>
-      <ul>
-        {sampleData.map((team) => {
-          return <li id={team.id}>{team.team_name}</li>;
-        })}
-      </ul>
+      <table className='font-spiegel w-full text-left'>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className='p-7 uppercase text-[#555555]'>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody className='border-gold2 border'>
+          {table.getRowModel().rows.map((row, index) => (
+            <tr key={row.id} className={`${evenRowBg(index)}`}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className='p-7'>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

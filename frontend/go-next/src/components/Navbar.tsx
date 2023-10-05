@@ -9,7 +9,7 @@ export default function Navbar() {
         <nav className='ml-[40px]'>
           <ul className='flex gap-x-10 text-white'>
             <NavLink>Home</NavLink>
-            <NavLink>Rankings</NavLink>
+            <NavLink>About Us</NavLink>
             <NavLink>Documentation</NavLink>
           </ul>
         </nav>

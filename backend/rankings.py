@@ -49,40 +49,24 @@ def tournament_rankings(tournament):
                     for team in game["teams"]:
                         blue_team = team[0]
                         red_team = team[1]
+                        
                         b = get_team(blue_team["id"])
                         blue_team_name = b["name"]
                         if not any (d['team_name'] == b["name"] for d in teams_in_tournament):
-                            teams_in_tournament.append({
-                                "id" : b["team_id"],
-                                "team_name" : b["name"],
-                                "rank" : 0,
-                                "region" : None,
-                                "elo" : 1000
-                            })
-
-                        
+                            add_new_team(b)
                         r = get_team(red_team["id"])
                         red_team_name = r["name"]
                         if not any (d['team_name'] == r["name"] for d in teams_in_tournament):
-                            teams_in_tournament.append({
-                                "id" : r["team_id"],
-                                "team_name" : r["name"],
-                                "rank" : 0,
-                                "region" : None,
-                                "elo" : 1000
-                            })
+                            add_new_team(r)
 
-                        ## Blue Team wins
                         if (team[0]["result"]["outcome"] == "win"):
-                            # res = next(t for t in teams_in_tournament if t["team_name"] == blue_team_name)["elo"]
-                            # print (res)
                             blue_new_elo = calculate_elo_rating(
                                 next(t for t in teams_in_tournament if t["team_name"] == blue_team_name)["elo"],
                                 next(t for t in teams_in_tournament if t["team_name"] == red_team_name)["elo"], 1, k)
                             red_new_elo = calculate_elo_rating(
                                 next(t for t in teams_in_tournament if t["team_name"] == red_team_name)["elo"],
                                 next(t for t in teams_in_tournament if t["team_name"] == blue_team_name)["elo"], 0, k)
-                            # teams_in_tournament[blue_team_name] = blue_new_elo
+                           
                             for t in teams_in_tournament:
                                 if t["team_name"] == blue_team_name:
                                     t["elo"] = blue_new_elo
@@ -99,7 +83,15 @@ def get_team(id):
     output = [t for t in teams_data if t['team_id'] == str(id)]
     return output[0]
     
-  
+def add_new_team(t):
+    teams_in_tournament.append({
+                                "id" : t["team_id"],
+                                "team_name" : t["name"],
+                                "rank" : 0,
+                                "region" : None,
+                                "elo" : 1000
+                            })
+
 def calculate_elo_rating(player_rating, opponent_rating, outcome, k=32):
     """
     Calculate the new Elo rating for a player.

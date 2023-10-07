@@ -25,13 +25,16 @@ stages_k = {
 "west" : 2
 }
 
+with open("esports-data/tournaments.json", "r") as json_file:
+        tournaments_data = json.load(json_file)
+
 with open("esports-data/teams.json", "r") as json_file:
         teams_data = json.load(json_file)
 
-def tournament_rankings(tournament):
-    with open("esports-data/tournaments.json", "r") as json_file:
-        tournaments_data = json.load(json_file)
+with open("esports-data/leagues.json", "r") as json_file:
+        leagues_data = json.load(json_file)
 
+def tournament_rankings(tournament):
     to_df = pd.DataFrame(tournaments_data)
     filtered_tournament = to_df[to_df["slug"] == tournament]
     ##print(filtered_tournament)
@@ -79,10 +82,35 @@ def tournament_rankings(tournament):
     to_json = json.dumps(sorted_teams)
     print(to_json)
 
+def clean_tournaments():
+    for tournament in tournaments_data:
+       start_date = tournament.get("startDate", "")
+       if start_date.startswith(str(year)):
+           for stage in tournament["stages"]:
+               for section in stage["sections"]:
+                   for match in section["matches"]:
+                       for game in match["games"]:
+                           if game["state"] == "completed":
+                               
+
+
 def get_team(id):
     output = [t for t in teams_data if t['team_id'] == str(id)]
     return output[0]
     
+def get_major_regions():
+    output = [t for t in leagues_data if (t['name'] == 'LCS' or t['name'] == 'LEC' or t['name'] == 'LCK' or t['name'] == 'LPL')]
+    for item in output:  # my_list if the list that you have in your question
+        del item['slug']
+        del item['sport']
+        del item['image']
+        del item['lightImage']
+        del item['tournaments']
+        del item['darkImage']
+        del item['displayPriority']
+    to_json = json.dumps(output)
+    return to_json
+
 def add_new_team(t):
     teams_in_tournament.append({
                                 "id" : t["team_id"],
@@ -107,4 +135,5 @@ def calculate_elo_rating(player_rating, opponent_rating, outcome, k=32):
     return new_rating
 
 
-tournament_rankings("lcs_spring_2023")
+##tournament_rankings("lcs_summer_2023")
+print(get_major_regions())

@@ -2,27 +2,33 @@ import pandas as pd
 import json
 import team
 
-teams_in_tournament = []
+major_tourn_23 = [
 
+] 
+
+
+## k weight value of a stage in a tournament
 stages_k = {
-"Groups" : 16,
-"knockouts" : 8, 
-"Regular Season" : 32, 
-"Playoffs" : 100, 
-"Regional Finals" : 32, 
-"Round 1" : 4, 
-"Round 2" : 8, 
-"Knockouts" : 4, 
-"promotion" : 2, 
-"Regional Qualifier" : 2, 
-"Play In Groups" : 8, 
-"Play In Knockouts" : 8, 
-"Promotion Series" : 2, 
-"regional_qualifier" : 2, 
-"Bracket Stage" : 8, 
-"play_in_knockouts" : 8,
-"east" : 2, 
-"west" : 2
+    "Groups" : 16,
+    "Group A\nGroup B" : 16,
+    "knockouts" : 8, 
+    "Regular Season" : 32, 
+    "Playoffs" : 100, 
+    "Regional Finals" : 32, 
+    "Round 1" : 4, 
+    "Round 2" : 8, 
+    "Knockouts" : 4, 
+    "promotion" : 2, 
+    "Regional Qualifier" : 2, 
+    "Play In Groups" : 8, 
+    "Play In Knockouts" : 8, 
+    "Promotion Series" : 2, 
+    "regional_qualifier" : 2, 
+    "Bracket Stage" : 8, 
+    "play_in_knockouts" : 8,
+    "east" : 2, 
+    "west" : 2
+
 }
 
 with open("esports-data/tournaments.json", "r") as json_file:
@@ -34,10 +40,16 @@ with open("esports-data/teams.json", "r") as json_file:
 with open("esports-data/leagues.json", "r") as json_file:
         leagues_data = json.load(json_file)
 
-def tournament_rankings(tournament):
-    to_df = pd.DataFrame(tournaments_data)
+with open("esports-data/clean_tournaments.json", "r") as json_file:
+        clean_tournaments_data = json.load(json_file)
+
+def tournament_rankings(tournament, global_data):
+    if global_data:
+        teams_in_tournament = global_data
+    else:
+        teams_in_tournament = []
+    to_df = pd.DataFrame(clean_tournaments_data)
     filtered_tournament = to_df[to_df["slug"] == tournament]
-    ##print(filtered_tournament)
     for stage in filtered_tournament["stages"]:
         stage = pd.DataFrame(stage)
         for section in stage["sections"]:
@@ -54,14 +66,24 @@ def tournament_rankings(tournament):
                         red_team = team[1]
                         
                         b = get_team(blue_team["id"])
-                        blue_team_name = b["name"]
-                        if not any (d['team_name'] == b["name"] for d in teams_in_tournament):
-                            add_new_team(b)
+                        if b is None:
+                            blue_team_name = "NoTeamFound"
+                        else:
+                            blue_team_name = b["name"]
+                        
+                        
+                        print('testing d')
+                        print(teams_in_tournament)
+                        print(type(teams_in_tournament))
+                        if not any (d['team_name'] == blue_team_name for d in teams_in_tournament):
+                            add_new_team(teams_in_tournament, b)
                         r = get_team(red_team["id"])
-                        red_team_name = r["name"]
-                        if not any (d['team_name'] == r["name"] for d in teams_in_tournament):
-                            add_new_team(r)
-
+                        if r is None:
+                            red_team_name = "NoTeamFound"
+                        else:
+                            red_team_name = r["name"]
+                        if not any (d['team_name'] == red_team_name for d in teams_in_tournament):
+                            add_new_team(teams_in_tournament, r)
                         if (team[0]["result"]["outcome"] == "win"):
                             blue_new_elo = calculate_elo_rating(
                                 next(t for t in teams_in_tournament if t["team_name"] == blue_team_name)["elo"],
@@ -80,27 +102,65 @@ def tournament_rankings(tournament):
     for index, team_data in enumerate(sorted_teams, start=1):
         team_data['rank'] = index
     to_json = json.dumps(sorted_teams)
-    print(to_json)
+    return(to_json)
+
+def global_rankings():
+    global_data = []
+    # for i in clean_tournaments_data if :
+    x = 0
+    for i in clean_tournaments_data:
+        global_data = json.loads(tournament_rankings(i["slug"], global_data))
+        x += 1
+        print (global_data)
+        print(x)
+    return global_data
+
+
 
 def clean_tournaments():
-    for tournament in tournaments_data:
-       start_date = tournament.get("startDate", "")
-       if start_date.startswith(str(year)):
-           for stage in tournament["stages"]:
-               for section in stage["sections"]:
-                   for match in section["matches"]:
-                       for game in match["games"]:
-                           if game["state"] == "completed":
+   
+    # Extract the list of IDs from the second JSON file
+    major_regions = json.loads(get_major_regions())
+    id_list = [item['id'] for item in major_regions]
+
+    # Filter the items in the first JSON file based on the condition
+    filtered_data = [item for item in tournaments_data if item['leagueId'] in id_list and item['startDate'].startswith('2023')]
+    
+    # Save the filtered data back to the first JSON file
+    with open('clean_tournaments.json', 'w') as file1:
+        json.dump(filtered_data, file1, indent=4)
                                
 
 
 def get_team(id):
     output = [t for t in teams_data if t['team_id'] == str(id)]
-    return output[0]
-    
+    if output:
+        return output[0]
+    else:
+        return None
+
+def add_new_team(teams, t):
+
+    if not t:
+        teams.append({
+                                "id" : 1,
+                                "team_name" : "NoTeamFound",
+                                "rank" : 0,
+                                "region" : None,
+                                "elo" : 1000
+                            })
+    else:
+        teams.append({
+                                "id" : t["team_id"],
+                                "team_name" : t["name"],
+                                "rank" : 0,
+                                "region" : None,
+                                "elo" : 1000
+                            })
+
 def get_major_regions():
-    output = [t for t in leagues_data if (t['name'] == 'LCS' or t['name'] == 'LEC' or t['name'] == 'LCK' or t['name'] == 'LPL')]
-    for item in output:  # my_list if the list that you have in your question
+    output = [t for t in leagues_data if (t['name'] == 'LCS' or t['name'] == 'LEC' or t['name'] == 'LCK' or t['name'] == 'LPL')] #filter out to major regions only
+    for item in output:  # filter out irrelevant columns
         del item['slug']
         del item['sport']
         del item['image']
@@ -108,17 +168,12 @@ def get_major_regions():
         del item['tournaments']
         del item['darkImage']
         del item['displayPriority']
+        del item['priority']
     to_json = json.dumps(output)
     return to_json
 
-def add_new_team(t):
-    teams_in_tournament.append({
-                                "id" : t["team_id"],
-                                "team_name" : t["name"],
-                                "rank" : 0,
-                                "region" : None,
-                                "elo" : 1000
-                            })
+# def filter_by_tournament_name(item):
+#     tournament
 
 def calculate_elo_rating(player_rating, opponent_rating, outcome, k=32):
     """
@@ -135,5 +190,7 @@ def calculate_elo_rating(player_rating, opponent_rating, outcome, k=32):
     return new_rating
 
 
-##tournament_rankings("lcs_summer_2023")
-print(get_major_regions())
+x = global_rankings()
+print(x)
+##print (tournament_rankings('lpl_summer_2023', None))
+##clean_tournaments()

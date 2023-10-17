@@ -1,0 +1,72 @@
+[
+    {
+        "id": "99294153824386385",
+        "team_name": "Golden Guardians",
+        "rank": 1,
+        "region": "LCS",
+        "elo": 1129.302152216572
+    },
+    {
+        "id": "98767991877340524",
+        "team_name": "Cloud9",
+        "rank": 2,
+        "region": "LCS",
+        "elo": 1118.2185699517345
+    },
+    {
+        "id": "98926509885559666",
+        "team_name": "Team Liquid Honda",
+        "rank": 3,
+        "region": "LCS",
+        "elo": 1075.024889783941
+    },
+    {
+        "id": "106972778172351142",
+        "team_name": "NRG",
+        "rank": 4,
+        "region": "LCS",
+        "elo": 1068.285974954026
+    },
+    {
+        "id": "98926509883054987",
+        "team_name": "Dignitas",
+        "rank": 5,
+        "region": "LCS",
+        "elo": 1007.8399429138173
+    },
+    {
+        "id": "98767991930907107",
+        "team_name": "Immortals Progressive",
+        "rank": 6,
+        "region": "LCS",
+        "elo": 976.0142216272291
+    },
+    {
+        "id": "98926509892121852",
+        "team_name": "FlyQuest",
+        "rank": 7,
+        "region": "LCS",
+        "elo": 962.6275538351189
+    },
+    {
+        "id": "99294153828264740",
+        "team_name": "100 Thieves",
+        "rank": 8,
+        "region": "LCS",
+        "elo": 926.9601766980978
+    },
+    {
+        "id": "98767991860392497",
+        "team_name": "TSM",
+        "rank": 9,
+        "region": "LCS",
+        "elo": 925.5217945061188
+    },
+    {
+        "id": "103461966951059521",
+        "team_name": "Evil Geniuses LG",
+        "rank": 10,
+        "region": "LCS",
+        "elo": 810.2047235133451
+    }
+]

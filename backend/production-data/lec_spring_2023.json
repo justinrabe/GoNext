@@ -1,0 +1,72 @@
+[
+    {
+        "id": "107563714667537640",
+        "team_name": "Team BDS",
+        "rank": 1,
+        "region": "LEC",
+        "elo": 1094.7114264684585
+    },
+    {
+        "id": "103461966965149786",
+        "team_name": "MAD Lions",
+        "rank": 2,
+        "region": "LEC",
+        "elo": 1053.6255024903394
+    },
+    {
+        "id": "101383793569248484",
+        "team_name": "Astralis",
+        "rank": 3,
+        "region": "LEC",
+        "elo": 1043.2893695118582
+    },
+    {
+        "id": "98767991926151025",
+        "team_name": "G2 Esports",
+        "rank": 4,
+        "region": "LEC",
+        "elo": 987.2141903889337
+    },
+    {
+        "id": "101383793574360315",
+        "team_name": "KOI",
+        "rank": 5,
+        "region": "LEC",
+        "elo": 981.6777794063711
+    },
+    {
+        "id": "109637393694097670",
+        "team_name": "Team Heretics",
+        "rank": 6,
+        "region": "LEC",
+        "elo": 981.5927725551196
+    },
+    {
+        "id": "101383793572656373",
+        "team_name": "EXCEL",
+        "rank": 7,
+        "region": "LEC",
+        "elo": 976.873999362615
+    },
+    {
+        "id": "101383793567806688",
+        "team_name": "SK Gaming",
+        "rank": 8,
+        "region": "LEC",
+        "elo": 971.1533705403117
+    },
+    {
+        "id": "98767991866488695",
+        "team_name": "Fnatic",
+        "rank": 9,
+        "region": "LEC",
+        "elo": 961.0333511665731
+    },
+    {
+        "id": "99322214695067838",
+        "team_name": "Team Vitality",
+        "rank": 10,
+        "region": "LEC",
+        "elo": 948.8282381094194
+    }
+]

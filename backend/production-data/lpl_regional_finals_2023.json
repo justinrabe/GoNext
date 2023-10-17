@@ -1,0 +1,30 @@
+[
+    {
+        "id": "99566404850008779",
+        "team_name": "Suzhou LNG Esports",
+        "rank": 1,
+        "region": "LPL",
+        "elo": 1116.0
+    },
+    {
+        "id": "99566404853058754",
+        "team_name": "WeiboGaming FAW AUDI",
+        "rank": 2,
+        "region": "LPL",
+        "elo": 1102.514294613573
+    },
+    {
+        "id": "99566404854685458",
+        "team_name": "TOP ESPORTS",
+        "rank": 3,
+        "region": "LPL",
+        "elo": 1097.318267433319
+    },
+    {
+        "id": "98767991882270868",
+        "team_name": "SHANGHAI EDWARD GAMING HYCAN",
+        "rank": 4,
+        "region": "LPL",
+        "elo": 1084.1674379531082
+    }
+]

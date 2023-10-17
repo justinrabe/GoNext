@@ -1,0 +1,121 @@
+[
+    {
+        "id": "99566404852189289",
+        "team_name": "JDG Intel Esports Club",
+        "rank": 1,
+        "region": "LPL",
+        "elo": 1354.829976408057
+    },
+    {
+        "id": "99566404850008779",
+        "team_name": "Suzhou LNG Esports",
+        "rank": 2,
+        "region": "LPL",
+        "elo": 1303.8993228318432
+    },
+    {
+        "id": "98767991882270868",
+        "team_name": "EDward Gaming Hycan",
+        "rank": 3,
+        "region": "LPL",
+        "elo": 1159.871701402423
+    },
+    {
+        "id": "99566404853058754",
+        "team_name": "WeiboGaming FAW AUDI",
+        "rank": 4,
+        "region": "LPL",
+        "elo": 1148.984996806029
+    },
+    {
+        "id": "99566404854685458",
+        "team_name": "TOP ESPORTS",
+        "rank": 5,
+        "region": "LPL",
+        "elo": 1145.4061228866676
+    },
+    {
+        "id": "99566404845279652",
+        "team_name": "Oh My God",
+        "rank": 6,
+        "region": "LPL",
+        "elo": 1119.9050862175336
+    },
+    {
+        "id": "98767991892579754",
+        "team_name": "Royal Never Give Up",
+        "rank": 7,
+        "region": "LPL",
+        "elo": 1117.9125981453526
+    },
+    {
+        "id": "99566404853854212",
+        "team_name": "Bilibili Gaming Pingan Bank",
+        "rank": 8,
+        "region": "LPL",
+        "elo": 1115.168665755931
+    },
+    {
+        "id": "101388912914513220",
+        "team_name": "Ninjas in Pyjamas",
+        "rank": 9,
+        "region": "LPL",
+        "elo": 1097.0974555673045
+    },
+    {
+        "id": "99566404855553726",
+        "team_name": "FunPlus Phoenix",
+        "rank": 10,
+        "region": "LPL",
+        "elo": 1087.1897589275513
+    },
+    {
+        "id": "99566404848691211",
+        "team_name": "Invictus Gaming",
+        "rank": 11,
+        "region": "LPL",
+        "elo": 1040.2053371033594
+    },
+    {
+        "id": "101388912911039804",
+        "team_name": "ThunderTalk Gaming",
+        "rank": 12,
+        "region": "LPL",
+        "elo": 1030.9893089155855
+    },
+    {
+        "id": "99566404847770461",
+        "team_name": "Rare Atom",
+        "rank": 13,
+        "region": "LPL",
+        "elo": 1021.021073232654
+    },
+    {
+        "id": "98767991887166787",
+        "team_name": "Team WE",
+        "rank": 14,
+        "region": "LPL",
+        "elo": 999.2316054013885
+    },
+    {
+        "id": "99566404846951820",
+        "team_name": "LGD GAMING",
+        "rank": 15,
+        "region": "LPL",
+        "elo": 999.1182001121359
+    },
+    {
+        "id": "103461966986776720",
+        "team_name": "Ultra Prime",
+        "rank": 16,
+        "region": "LPL",
+        "elo": 992.0054178756495
+    },
+    {
+        "id": "99566404856367466",
+        "team_name": "Anyones Legend",
+        "rank": 17,
+        "region": "LPL",
+        "elo": 967.1633724105347
+    }
+]

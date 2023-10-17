@@ -1,0 +1,51 @@
+[
+    {
+        "id": "103461966965149786",
+        "team_name": "MAD Lions",
+        "rank": 1,
+        "region": "LEC",
+        "elo": 1016.0
+    },
+    {
+        "id": "98767991926151025",
+        "team_name": "G2 Esports",
+        "rank": 2,
+        "region": "LEC",
+        "elo": 1014.6658413353916
+    },
+    {
+        "id": "107563714667537640",
+        "team_name": "Team BDS",
+        "rank": 3,
+        "region": "LEC",
+        "elo": 1002.0091447622616
+    },
+    {
+        "id": "98767991866488695",
+        "team_name": "Fnatic",
+        "rank": 4,
+        "region": "LEC",
+        "elo": 1000.0676591404803
+    },
+    {
+        "id": "101383793572656373",
+        "team_name": "EXCEL",
+        "rank": 5,
+        "region": "LEC",
+        "elo": 983.9323408595197
+    },
+    {
+        "id": "101383793567806688",
+        "team_name": "SK Gaming",
+        "rank": 6,
+        "region": "LEC",
+        "elo": 983.3250139023468
+    },
+    {
+        "id": 1,
+        "team_name": "NoTeamFound",
+        "rank": 7,
+        "region": "LOL",
+        "elo": 0
+    }
+]

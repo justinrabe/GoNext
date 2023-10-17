@@ -1,0 +1,380 @@
+[
+    {
+        "id": "100205573495116443",
+        "team_name": "Gen.G",
+        "rank": 1,
+        "region": "LCK",
+        "elo": 1418.6975299743917
+    },
+    {
+        "id": "99566404852189289",
+        "team_name": "Beijing JDG Intel Esports Club",
+        "rank": 2,
+        "region": "LPL",
+        "elo": 1352.9906500479744
+    },
+    {
+        "id": "99566404850008779",
+        "team_name": "Suzhou LNG Esports",
+        "rank": 3,
+        "region": "LPL",
+        "elo": 1305.604772601978
+    },
+    {
+        "id": "98767991853197861",
+        "team_name": "T1",
+        "rank": 4,
+        "region": "LCK",
+        "elo": 1197.554653833609
+    },
+    {
+        "id": "98767991926151025",
+        "team_name": "G2 Esports",
+        "rank": 5,
+        "region": "LEC",
+        "elo": 1189.777471536552
+    },
+    {
+        "id": "98767991877340524",
+        "team_name": "Cloud9",
+        "rank": 6,
+        "region": "LCS",
+        "elo": 1185.8801001525605
+    },
+    {
+        "id": "100725845018863243",
+        "team_name": "Dplus Kia",
+        "rank": 7,
+        "region": "LCK",
+        "elo": 1181.8291523733205
+    },
+    {
+        "id": "99566404579461230",
+        "team_name": "kt Rolster",
+        "rank": 8,
+        "region": "LCK",
+        "elo": 1181.757966276374
+    },
+    {
+        "id": "98767991882270868",
+        "team_name": "SHANGHAI EDWARD GAMING HYCAN",
+        "rank": 9,
+        "region": "LPL",
+        "elo": 1157.7767501446658
+    },
+    {
+        "id": "99566404853058754",
+        "team_name": "WeiboGaming FAW AUDI",
+        "rank": 10,
+        "region": "LPL",
+        "elo": 1151.662213384788
+    },
+    {
+        "id": "99566404854685458",
+        "team_name": "TOP ESPORTS",
+        "rank": 11,
+        "region": "LPL",
+        "elo": 1144.876018643075
+    },
+    {
+        "id": "99566404853854212",
+        "team_name": "Bilibili Gaming Pingan Bank",
+        "rank": 12,
+        "region": "LPL",
+        "elo": 1134.7635411814608
+    },
+    {
+        "id": "99566404845279652",
+        "team_name": "Oh My God",
+        "rank": 13,
+        "region": "LPL",
+        "elo": 1118.4622072372351
+    },
+    {
+        "id": "98767991892579754",
+        "team_name": "Royal Never Give Up",
+        "rank": 14,
+        "region": "LPL",
+        "elo": 1117.8415601336249
+    },
+    {
+        "id": "101388912914513220",
+        "team_name": "Ninjas in Pyjamas",
+        "rank": 15,
+        "region": "LPL",
+        "elo": 1097.4385655533335
+    },
+    {
+        "id": "99566404855553726",
+        "team_name": "FunPlus Phoenix",
+        "rank": 16,
+        "region": "LPL",
+        "elo": 1086.2428874048724
+    },
+    {
+        "id": "100205573496804586",
+        "team_name": "Hanwha Life Esports",
+        "rank": 17,
+        "region": "LCK",
+        "elo": 1084.670831920451
+    },
+    {
+        "id": "106972778172351142",
+        "team_name": "NRG",
+        "rank": 18,
+        "region": "LCS",
+        "elo": 1068.285974954026
+    },
+    {
+        "id": "99294153824386385",
+        "team_name": "Golden Guardians",
+        "rank": 19,
+        "region": "LCS",
+        "elo": 1068.2064615082006
+    },
+    {
+        "id": "107563714667537640",
+        "team_name": "Team BDS",
+        "rank": 20,
+        "region": "LEC",
+        "elo": 1056.2387197245155
+    },
+    {
+        "id": "98926509892121852",
+        "team_name": "FlyQuest",
+        "rank": 21,
+        "region": "LCS",
+        "elo": 1045.7824167373462
+    },
+    {
+        "id": "103461966965149786",
+        "team_name": "MAD Lions",
+        "rank": 22,
+        "region": "LEC",
+        "elo": 1040.9354744048449
+    },
+    {
+        "id": "99566404848691211",
+        "team_name": "Invictus Gaming",
+        "rank": 23,
+        "region": "LPL",
+        "elo": 1039.4734911953256
+    },
+    {
+        "id": "101388912911039804",
+        "team_name": "ThunderTalk Gaming",
+        "rank": 24,
+        "region": "LPL",
+        "elo": 1031.3742372064441
+    },
+    {
+        "id": "99566404847770461",
+        "team_name": "Rare Atom",
+        "rank": 25,
+        "region": "LPL",
+        "elo": 1021.0210332888734
+    },
+    {
+        "id": "105505619546859895",
+        "team_name": "OKSavingsBank BRION",
+        "rank": 26,
+        "region": "LCK",
+        "elo": 1013.0067210774154
+    },
+    {
+        "id": "98926509885559666",
+        "team_name": "Team Liquid Honda",
+        "rank": 27,
+        "region": "LCS",
+        "elo": 1012.004282110334
+    },
+    {
+        "id": "100725845022060229",
+        "team_name": "Liiv SANDBOX",
+        "rank": 28,
+        "region": "LCK",
+        "elo": 1011.7997612061627
+    },
+    {
+        "id": "98926509884398584",
+        "team_name": "CLG",
+        "rank": 29,
+        "region": "LCS",
+        "elo": 1007.1014153728729
+    },
+    {
+        "id": "99566404846951820",
+        "team_name": "LGD GAMING",
+        "rank": 30,
+        "region": "LPL",
+        "elo": 999.3315479725366
+    },
+    {
+        "id": "101383793574360315",
+        "team_name": "KOI",
+        "rank": 31,
+        "region": "LEC",
+        "elo": 998.7916152328911
+    },
+    {
+        "id": "98767991887166787",
+        "team_name": "Team WE",
+        "rank": 32,
+        "region": "LPL",
+        "elo": 998.1138634448723
+    },
+    {
+        "id": "103461966986776720",
+        "team_name": "Ultra Prime",
+        "rank": 33,
+        "region": "LPL",
+        "elo": 991.9725179075122
+    },
+    {
+        "id": "102747101565183056",
+        "team_name": "NongShim REDFORCE",
+        "rank": 34,
+        "region": "LCK",
+        "elo": 987.7519005698732
+    },
+    {
+        "id": "101383793569248484",
+        "team_name": "Astralis",
+        "rank": 35,
+        "region": "LEC",
+        "elo": 985.2379430140804
+    },
+    {
+        "id": "99322214695067838",
+        "team_name": "Team Vitality",
+        "rank": 36,
+        "region": "LEC",
+        "elo": 969.7327249392727
+    },
+    {
+        "id": "98767991866488695",
+        "team_name": "Fnatic",
+        "rank": 37,
+        "region": "LEC",
+        "elo": 968.1538781749158
+    },
+    {
+        "id": "99566404585387054",
+        "team_name": "DRX",
+        "rank": 38,
+        "region": "LCK",
+        "elo": 967.302118850978
+    },
+    {
+        "id": "99566404856367466",
+        "team_name": "Anyones Legend",
+        "rank": 39,
+        "region": "LPL",
+        "elo": 967.0280111865081
+    },
+    {
+        "id": "99566404581868574",
+        "team_name": "Kwangdong Freecs",
+        "rank": 40,
+        "region": "LCK",
+        "elo": 963.1930383875081
+    },
+    {
+        "id": "101383793567806688",
+        "team_name": "SK Gaming",
+        "rank": 41,
+        "region": "LEC",
+        "elo": 962.4512688985618
+    },
+    {
+        "id": "98767991860392497",
+        "team_name": "TSM",
+        "rank": 42,
+        "region": "LCS",
+        "elo": 960.5003164901688
+    },
+    {
+        "id": "99294153828264740",
+        "team_name": "100 Thieves",
+        "rank": 43,
+        "region": "LCS",
+        "elo": 932.2817095628557
+    },
+    {
+        "id": "98926509883054987",
+        "team_name": "Dignitas",
+        "rank": 44,
+        "region": "LCS",
+        "elo": 929.6861178785792
+    },
+    {
+        "id": "101383793572656373",
+        "team_name": "EXCEL",
+        "rank": 45,
+        "region": "LEC",
+        "elo": 924.38573388424
+    },
+    {
+        "id": "98767991930907107",
+        "team_name": "Immortals Progressive",
+        "rank": 46,
+        "region": "LCS",
+        "elo": 911.6187760265701
+    },
+    {
+        "id": "109637393694097670",
+        "team_name": "Team Heretics",
+        "rank": 47,
+        "region": "LEC",
+        "elo": 903.3233917475345
+    },
+    {
+        "id": "103461966951059521",
+        "team_name": "Evil Geniuses LG",
+        "rank": 48,
+        "region": "LCS",
+        "elo": 864.9416971916975
+    },
+    {
+        "id": "104367068120825486",
+        "team_name": "PSG Talon",
+        "rank": 49,
+        "region": "PCS",
+        "elo": 806.0749452127461
+    },
+    {
+        "id": "98767991954244555",
+        "team_name": "GAM Esports",
+        "rank": 50,
+        "region": "VCS",
+        "elo": 802.9416034988571
+    },
+    {
+        "id": "105397404796640412",
+        "team_name": "LOUD",
+        "rank": 51,
+        "region": "CBLOL",
+        "elo": 798.397545901997
+    },
+    {
+        "id": "100285330168091787",
+        "team_name": "DetonatioN FocusMe",
+        "rank": 52,
+        "region": "LJL",
+        "elo": 792.0278156598936
+    },
+    {
+        "id": "98767991935149427",
+        "team_name": "Movistar R7",
+        "rank": 53,
+        "region": "LLA",
+        "elo": 791.7030571787232
+    },
+    {
+        "id": 1,
+        "team_name": "NoTeamFound",
+        "rank": 54,
+        "region": "LOL",
+        "elo": 0
+    }
+]

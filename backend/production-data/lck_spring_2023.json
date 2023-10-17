@@ -1,0 +1,72 @@
+[
+    {
+        "id": "100205573495116443",
+        "team_name": "Gen.G",
+        "rank": 1,
+        "region": "LCK",
+        "elo": 1251.061934519018
+    },
+    {
+        "id": "98767991853197861",
+        "team_name": "T1",
+        "rank": 2,
+        "region": "LCK",
+        "elo": 1250.8344416271825
+    },
+    {
+        "id": "100725845018863243",
+        "team_name": "Dplus Kia",
+        "rank": 3,
+        "region": "LCK",
+        "elo": 1145.5730800007468
+    },
+    {
+        "id": "99566404579461230",
+        "team_name": "kt Rolster",
+        "rank": 4,
+        "region": "LCK",
+        "elo": 1129.7971205838965
+    },
+    {
+        "id": "100205573496804586",
+        "team_name": "Hanwha Life Esports",
+        "rank": 5,
+        "region": "LCK",
+        "elo": 1086.4973441986006
+    },
+    {
+        "id": "100725845022060229",
+        "team_name": "Liiv SANDBOX",
+        "rank": 6,
+        "region": "LCK",
+        "elo": 1082.1297828717409
+    },
+    {
+        "id": "99566404581868574",
+        "team_name": "Kwangdong Freecs",
+        "rank": 7,
+        "region": "LCK",
+        "elo": 1081.8958367969065
+    },
+    {
+        "id": "105505619546859895",
+        "team_name": "OKSavingsBank BRION",
+        "rank": 8,
+        "region": "LCK",
+        "elo": 1024.1029868925293
+    },
+    {
+        "id": "102747101565183056",
+        "team_name": "NongShim REDFORCE",
+        "rank": 9,
+        "region": "LCK",
+        "elo": 993.8579542045406
+    },
+    {
+        "id": "99566404585387054",
+        "team_name": "DRX",
+        "rank": 10,
+        "region": "LCK",
+        "elo": 954.249518304838
+    }
+]

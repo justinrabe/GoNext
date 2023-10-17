@@ -1,0 +1,93 @@
+[
+    {
+        "id": "99566404852189289",
+        "team_name": "JDG Intel Esports Club",
+        "rank": 1,
+        "region": "LPL",
+        "elo": 1114.5357928464393
+    },
+    {
+        "id": "99566404853854212",
+        "team_name": "Bilibili Gaming Pingan Bank",
+        "rank": 2,
+        "region": "LPL",
+        "elo": 1105.4863977808377
+    },
+    {
+        "id": "100205573495116443",
+        "team_name": "Gen.G",
+        "rank": 3,
+        "region": "LCK",
+        "elo": 1099.6008218195561
+    },
+    {
+        "id": "98767991853197861",
+        "team_name": "T1",
+        "rank": 4,
+        "region": "LCK",
+        "elo": 1092.8370132495895
+    },
+    {
+        "id": "98767991926151025",
+        "team_name": "G2 Esports",
+        "rank": 5,
+        "region": "LEC",
+        "elo": 1017.782559491951
+    },
+    {
+        "id": "98767991877340524",
+        "team_name": "Cloud9",
+        "rank": 6,
+        "region": "LCS",
+        "elo": 1002.2292568951519
+    },
+    {
+        "id": "103461966965149786",
+        "team_name": "MAD Lions",
+        "rank": 7,
+        "region": "LEC",
+        "elo": 992.2042323506295
+    },
+    {
+        "id": "99294153824386385",
+        "team_name": "Golden Guardians",
+        "rank": 8,
+        "region": "LCS",
+        "elo": 991.1248209484985
+    },
+    {
+        "id": "104367068120825486",
+        "team_name": "PSG Talon",
+        "rank": 9,
+        "region": "PCS",
+        "elo": 804.0812708898745
+    },
+    {
+        "id": "98767991954244555",
+        "team_name": "GAM Esports",
+        "rank": 10,
+        "region": "VCS",
+        "elo": 802.0724554592391
+    },
+    {
+        "id": "105397404796640412",
+        "team_name": "LOUD",
+        "rank": 11,
+        "region": "CBLOL",
+        "elo": 796.2076769459974
+    },
+    {
+        "id": "100285330168091787",
+        "team_name": "DetonatioN FocusMe",
+        "rank": 12,
+        "region": "LJL",
+        "elo": 792.002165322103
+    },
+    {
+        "id": "98767991935149427",
+        "team_name": "Movistar R7",
+        "rank": 13,
+        "region": "LLA",
+        "elo": 789.8355360001326
+    }
+]

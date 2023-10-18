@@ -5,13 +5,13 @@ import Navbar from './components/Navbar';
 import RankingsDisplay from './components/RankingsDisplay';
 
 export default function App() {
-	return (
-		<div className=''>
-			<Navbar />
-			<Hero />
-			<RankingsDisplay />
-			<Hero2 />
-			<Footer />
-		</div>
-	);
+  return (
+    <div>
+      <Navbar />
+      <Hero />
+      <RankingsDisplay />
+      <Hero2 />
+      <Footer />
+    </div>
+  );
 }

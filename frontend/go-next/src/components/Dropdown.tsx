@@ -15,7 +15,7 @@ interface DropdownProps {
 
 export default function Dropdown({ buttonName, options }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null); // Create a ref for the dropdown container
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a ref for the dropdown container
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

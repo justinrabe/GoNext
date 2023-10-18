@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-table';
 import { useState } from 'react';
 import Dropdown from './Dropdown';
+import RankingsButton from './RankingsButton';
 import { Team, Tournament } from '../types';
 
 const sampleData: Team[] = [
@@ -94,6 +95,12 @@ const tournamentOptions: Tournament[] = [
     dateEnd: new Date(),
     id: '5678',
   },
+  {
+    name: 'LCK Spring 2023',
+    dateStart: new Date(),
+    dateEnd: new Date(),
+    id: '0101',
+  },
 ];
 
 const columnHelper = createColumnHelper<Team>();
@@ -129,8 +136,13 @@ export default function RankingsDisplay() {
   };
 
   return (
-    <div className='bg-marble w-full bg-cover px-[60px] pb-[58px] pt-[58px]'>
-      <Dropdown buttonName={'Tournaments'} options={tournamentOptions} />
+    <div className='w-full bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
+      <div className='flex max-w-[712px] items-center justify-between'>
+        <RankingsButton name={'Global'} />
+        <RankingsButton name={'Team'} />
+        <Dropdown buttonName={'Tournament'} options={tournamentOptions} />
+      </div>
+
       <table className='w-full text-left font-sans'>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -148,7 +160,7 @@ export default function RankingsDisplay() {
             </tr>
           ))}
         </thead>
-        <tbody className='border-gold2 border'>
+        <tbody className='border border-gold2'>
           {table.getRowModel().rows.map((row, index) => (
             <tr key={row.id} className={`${evenRowBg(index)}`}>
               {row.getVisibleCells().map((cell) => (

@@ -15,7 +15,7 @@ interface DropdownProps {
 
 export default function Dropdown({ buttonName, options }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null); // Create a ref for the dropdown container
+  const dropdownRef = useRef<HTMLDivElement | null> (null); // Create a ref for the dropdown container
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -23,7 +23,7 @@ export default function Dropdown({ buttonName, options }: DropdownProps) {
 
   useEffect(() => {
     const handleDocumentClick = (event: { target: any }) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (dropdownRef && dropdownRef.current && dropdownRef.current.contains(event.target)) {
         setIsOpen(false); // Close the dropdown if click is outside of the dropdown container
       }
     };

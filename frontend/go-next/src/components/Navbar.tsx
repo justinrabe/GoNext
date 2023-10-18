@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 export default function Navbar() {
   return (
     <>
@@ -18,7 +19,10 @@ export default function Navbar() {
   );
 }
 
-function NavLink({ children }) {
+type navprops = {
+  children : ReactNode
+}
+function NavLink({ children } : navprops) {
   return (
     <li className='hover:cursor-pointer'>
       <a href='/'>{children}</a>

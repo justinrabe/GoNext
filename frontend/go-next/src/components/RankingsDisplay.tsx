@@ -4,10 +4,12 @@ import {
   flexRender,
   createColumnHelper,
 } from '@tanstack/react-table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
 import RankingsButton from './RankingsButton';
 import { Team, Tournament } from '../types';
+import s3Client from '../utils/s3';
+import { ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
 
 const sampleData: Team[] = [
   {
@@ -124,7 +126,64 @@ const columns = [
 ];
 
 export default function RankingsDisplay() {
-  const [data, setData] = useState(() => [...sampleData]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchTournamentList = async () => {
+    const command = new ListObjectsV2Command({
+      Bucket: 'go-next-data', // Replace with your S3 bucket name
+    });
+
+    try {
+      const data = await s3Client.send(command);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchTournamentList();
+
+  // Helper function to convert a web-streams-polyfill ReadableStream to a string
+  const streamToString = async (stream) => {
+    const reader = stream.getReader();
+    let result = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      result += new TextDecoder().decode(value);
+    }
+    return result;
+  };
+
+  const fetchObject = async () => {
+    const command = new GetObjectCommand({
+      Bucket: 'go-next-data',
+      Key: 'final_global_rankings.json',
+    });
+
+    try {
+      const data = await s3Client.send(command);
+      // Convert the readable stream to text
+      const objectData = await streamToString(data.Body);
+      // Now parse the text as JSON
+      const jsonData = JSON.parse(objectData);
+      console.log(jsonData);
+
+      setData(jsonData);
+      setLoading(false);
+      return jsonData;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchObject();
+  }, []);
+
   const table = useReactTable({
     data,
     columns,

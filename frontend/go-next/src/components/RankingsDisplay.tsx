@@ -4,7 +4,7 @@ import {
   flexRender,
   createColumnHelper,
 } from '@tanstack/react-table';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Dropdown from './Dropdown';
 import RankingsButton from './RankingsButton';
 import { Team, Tournament } from '../types';
@@ -38,7 +38,7 @@ export default function RankingsDisplay() {
   const [data, setData] = useState<Array<Team>>([]);
   const [tournamentList, setTournamentList] = useState([]);
   const [regions, setRegions] = useState<string[]>([]);
-  const [teams, setTeams] = useState<string[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTournamentList = async () => {
@@ -89,14 +89,14 @@ export default function RankingsDisplay() {
       };
       setRegions(regionList());
 
-      const teamList = (): string[] => {
-        const uniqueTeams = new Set<string>();
-        jsonData.forEach((team: Team) => {
-          if (team.team_name) uniqueTeams.add(team.team_name);
-        });
-        return Array.from(uniqueTeams);
-      };
-      setTeams(teamList);
+      // const teamList = (): string[] => {
+      //   const uniqueTeams = new Set<string>();
+      //   jsonData.forEach((team: Team) => {
+      //     if (team.team_name) uniqueTeams.add(team.team_name);
+      //   });
+      //   return Array.from(uniqueTeams);
+      // };
+      setTeams(jsonData);
 
       setLoading(false);
       return jsonData;
@@ -180,33 +180,64 @@ export default function RankingsDisplay() {
 
 interface TeamDropdownProps {
   regions: string[];
-  teams: string[];
+  teams: Team[];
 }
 
 const TeamDropdown = ({ regions, teams }: TeamDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a ref for the dropdown container
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.stopPropagation(); // Prevent the click event from propagating to the parent (TeamDropdown)
+  };
+
+  useEffect(() => {
+    const handleDocumentClick = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false); // Close the dropdown if click is outside of the dropdown container
+      }
+    };
+
+    // Attach the click event listener
+    document.addEventListener('mousedown', handleDocumentClick);
+
+    // Cleanup - remove the listener when the component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handleDocumentClick);
+    };
+  }, []);
+
   return (
-    <div onClick={toggleDropdown} className='relative'>
+    <div onClick={toggleDropdown} className='relative' ref={dropdownRef}>
       <button className=' px-3 font-display text-[20px] font-medium uppercase text-gold4'>
         Team
       </button>
 
       {isOpen && (
-        <div className='absolute grid w-[1017px] grid-cols-2 border border-gold2 bg-white p-12'>
+        <div className='absolute z-10 grid w-[1017px] grid-cols-2 border border-gold2 bg-white p-12'>
           {regions.map((r) => {
             return (
-              <div>
-                {r}
-                <div>
+              <div key={r}>
+                <h2 className='font-bold text-zinc-700'>{r}</h2>
+                <div className='grid grid-cols-2'>
                   {teams
                     .filter((t) => t.region === r)
                     .map((team) => {
-                      return <li>{team}</li>;
+                      return (
+                        <label key={team.id}>
+                          <input
+                            type='checkbox'
+                            name='selectedTeams'
+                            value={team.team_name}
+                            onClick={handleCheckboxClick}
+                          />
+                          {team.team_name}
+                        </label>
+                      );
                     })}
                 </div>
               </div>

@@ -6,14 +6,20 @@ import downArrow from '/assets/Dropdown_DownArrow.svg';
 interface DropdownOption {
   id: string;
   name: string;
+  value: string;
 }
 
 interface DropdownProps {
   buttonName: string;
   options: DropdownOption[];
+  onOptionClick: (value: string) => void;
 }
 
-export default function Dropdown({ buttonName, options }: DropdownProps) {
+export default function Dropdown({
+  buttonName,
+  options,
+  onOptionClick,
+}: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a ref for the dropdown container
 
@@ -37,6 +43,13 @@ export default function Dropdown({ buttonName, options }: DropdownProps) {
     };
   }, []); // Empty dependency array means this effect will only run once, similar to componentDidMount
 
+  const handleOptionClick = (name: string) => {
+    // Pass the selected option's name up to the parent component
+    onOptionClick(name);
+    // Close the dropdown when an option is clicked
+    setIsOpen(false);
+  };
+
   return (
     <div
       ref={dropdownRef}
@@ -52,11 +65,16 @@ export default function Dropdown({ buttonName, options }: DropdownProps) {
         <div
           className={`${
             isOpen ? 'visible' : 'invisible'
-          } absolute z-10 w-full translate-y-[70%] list-none overflow-auto overflow-x-hidden border bg-white`}
+          } absolute z-10 w-full translate-y-[55%] list-none overflow-auto overflow-x-hidden border bg-white`}
         >
           {options.map((op) => {
             return (
-              <li className='w-full px-8 py-4 hover:bg-stone-300' key={op.name}>
+              <li
+                className='w-full px-8 py-4 hover:bg-stone-300'
+                key={op.name}
+                onClick={handleOptionClick}
+                value={op.name}
+              >
                 {op.name}
               </li>
             );

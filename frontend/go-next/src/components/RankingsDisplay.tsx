@@ -53,7 +53,7 @@ const columns = [
 ];
 
 export default function RankingsDisplay() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Array<Team>>([]);
   const [tournamentList, setTournamentList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -70,6 +70,7 @@ export default function RankingsDisplay() {
         return {
           id: tournament.Key,
           name: tournament.Key,
+          value: tournament.Key,
         };
       });
 
@@ -94,10 +95,10 @@ export default function RankingsDisplay() {
     return result;
   };
 
-  const fetchObject = async () => {
+  const fetchObject = async (bucketObjectKey: string) => {
     const command = new GetObjectCommand({
       Bucket: 'go-next-data',
-      Key: 'final_global_rankings.json',
+      Key: bucketObjectKey,
     });
 
     try {
@@ -118,7 +119,7 @@ export default function RankingsDisplay() {
 
   useEffect(() => {
     fetchTournamentList();
-    fetchObject();
+    fetchObject('final_global_rankings.json');
   }, []);
 
   const table = useReactTable({
@@ -131,12 +132,29 @@ export default function RankingsDisplay() {
     return index % 2 == 0 ? 'bg-white' : 'bg-gold1 border border-gold2';
   };
 
+  const handleGlobalBtnClick = () => {
+    fetchObject('final_global_rankings.json');
+  };
+
+  const handleTeamBtnClick = () => {
+    console.log('delete me');
+  };
+
+  const handleTournamentOptionClick = (e) => {
+    const optionBucketKey = e.target.getAttribute('value');
+    fetchObject(optionBucketKey);
+  };
+
   return (
     <div className='w-full bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
       <div className='flex max-w-[712px] items-center justify-between'>
-        <RankingsButton name={'Global'} />
-        <RankingsButton name={'Team'} />
-        <Dropdown buttonName={'Tournament'} options={tournamentList} />
+        <RankingsButton name={'Global'} onClick={handleGlobalBtnClick} />
+        <RankingsButton name={'Team'} onClick={handleTeamBtnClick} />
+        <Dropdown
+          buttonName={'Tournament'}
+          options={tournamentList}
+          onOptionClick={handleTournamentOptionClick}
+        />
       </div>
 
       <table className='w-full text-left font-sans'>

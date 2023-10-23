@@ -11,6 +11,8 @@ import { Team, Tournament } from '../types';
 import s3Client from '../utils/s3';
 import { ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
 import jsonToFormattedName from '../utils/jsonToFormattedName';
+import streamToString from '../utils/streamToString';
+import Button from './Button';
 
 const columnHelper = createColumnHelper<Team>();
 const columns = [
@@ -35,6 +37,8 @@ const columns = [
 export default function RankingsDisplay() {
   const [data, setData] = useState<Array<Team>>([]);
   const [tournamentList, setTournamentList] = useState([]);
+  const [regions, setRegions] = useState<string[]>([]);
+  const [teams, setTeams] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTournamentList = async () => {
@@ -60,20 +64,6 @@ export default function RankingsDisplay() {
     }
   };
 
-  // Helper function to convert a web-streams-polyfill ReadableStream to a string
-  const streamToString = async (stream: ReadableStream) => {
-    const reader = stream.getReader();
-    let result = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        break;
-      }
-      result += new TextDecoder().decode(value);
-    }
-    return result;
-  };
-
   const fetchObject = async (bucketObjectKey: string) => {
     const command = new GetObjectCommand({
       Bucket: 'go-next-data',
@@ -89,6 +79,25 @@ export default function RankingsDisplay() {
       console.log(jsonData);
 
       setData(jsonData);
+
+      const regionList = (): string[] => {
+        const uniqueRegions = new Set<string>();
+        jsonData.forEach((team: Team) => {
+          if (team.region) uniqueRegions.add(team.region);
+        });
+        return Array.from(uniqueRegions);
+      };
+      setRegions(regionList());
+
+      const teamList = (): string[] => {
+        const uniqueTeams = new Set<string>();
+        jsonData.forEach((team: Team) => {
+          if (team.team_name) uniqueTeams.add(team.team_name);
+        });
+        return Array.from(uniqueTeams);
+      };
+      setTeams(teamList);
+
       setLoading(false);
       return jsonData;
     } catch (error) {
@@ -128,7 +137,7 @@ export default function RankingsDisplay() {
     <div className='w-full bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
       <div className='flex max-w-[712px] items-center justify-between'>
         <RankingsButton name={'Global'} onClick={handleGlobalBtnClick} />
-        <RankingsButton name={'Team'} onClick={handleTeamBtnClick} />
+        <TeamDropdown regions={regions} teams={teams} />
         <Dropdown
           buttonName={'Tournament'}
           options={tournamentList}
@@ -168,3 +177,48 @@ export default function RankingsDisplay() {
     </div>
   );
 }
+
+interface TeamDropdownProps {
+  regions: string[];
+  teams: string[];
+}
+
+const TeamDropdown = ({ regions, teams }: TeamDropdownProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div onClick={toggleDropdown} className='relative'>
+      <button className=' px-3 font-display text-[20px] font-medium uppercase text-gold4'>
+        Team
+      </button>
+
+      {isOpen && (
+        <div className='absolute grid w-[1017px] grid-cols-2 border border-gold2 bg-white p-12'>
+          {regions.map((r) => {
+            return (
+              <div>
+                {r}
+                <div>
+                  {teams
+                    .filter((t) => t.region === r)
+                    .map((team) => {
+                      return <li>{team}</li>;
+                    })}
+                </div>
+              </div>
+            );
+          })}
+
+          <div>
+            <Button type='secondary'>Reset</Button>
+            <Button type='primary'>Compare</Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

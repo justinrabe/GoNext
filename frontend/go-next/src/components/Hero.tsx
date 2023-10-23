@@ -1,10 +1,10 @@
 export default function Hero() {
   return (
-    <div className='flex w-full flex-col items-center justify-center bg-blue5 px-8 py-20 text-center md:px-60 '>
-      <h1 className='font-display text-xl font-medium uppercase text-gold4 md:text-2xl'>
+    <div className='flex w-full flex-col items-center justify-center bg-blue5 px-60 py-20 text-center'>
+      <h1 className='font-display text-2xl font-medium uppercase text-gold4'>
         Global Power Rankings
       </h1>
-      <h2 className='text-balance mt-6 max-w-[960px] font-display text-2xl font-medium uppercase text-white md:text-3xl'>
+      <h2 className='text-balance mt-6 max-w-[960px] font-display text-3xl  font-medium uppercase text-white'>
         GLOBAL, TOURNAMENT, & CUSTOMIZED TEAM RANKINGS
       </h2>
       <p className='mt-4 max-w-[960px] font-medium leading-6 text-white'>

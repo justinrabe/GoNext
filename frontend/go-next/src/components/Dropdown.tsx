@@ -52,11 +52,11 @@ export default function Dropdown({ buttonName, options }: DropdownProps) {
         <div
           className={`${
             isOpen ? 'visible' : 'invisible'
-          } absolute z-10 w-full translate-y-[70%] list-none overflow-auto overflow-x-hidden border bg-white px-8`}
+          } absolute z-10 w-full translate-y-[70%] list-none overflow-auto overflow-x-hidden border bg-white`}
         >
           {options.map((op) => {
             return (
-              <li className='py-4' id={op.id}>
+              <li className='w-full px-8 py-4 hover:bg-stone-300' key={op.name}>
                 {op.name}
               </li>
             );

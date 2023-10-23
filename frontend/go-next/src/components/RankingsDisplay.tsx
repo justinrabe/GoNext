@@ -48,28 +48,37 @@ const columns = [
   }),
   columnHelper.accessor('elo', {
     header: 'ELO',
-    cell: (info) => Math.floor(info.getValue()),
+    cell: (info) => info.getValue().toFixed(2),
   }),
 ];
 
 export default function RankingsDisplay() {
   const [data, setData] = useState([]);
+  const [tournamentList, setTournamentList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTournamentList = async () => {
     const command = new ListObjectsV2Command({
-      Bucket: 'go-next-data', // Replace with your S3 bucket name
+      Bucket: 'go-next-data',
     });
 
     try {
       const data = await s3Client.send(command);
-      console.log(data);
+      console.log(data.Contents);
+
+      const newTournamentList = data.Contents.map((tournament) => {
+        return {
+          id: tournament.Key,
+          name: tournament.Key,
+        };
+      });
+
+      console.log(newTournamentList);
+      setTournamentList(newTournamentList);
     } catch (error) {
       console.error(error);
     }
   };
-
-  fetchTournamentList();
 
   // Helper function to convert a web-streams-polyfill ReadableStream to a string
   const streamToString = async (stream: ReadableStream) => {
@@ -108,6 +117,7 @@ export default function RankingsDisplay() {
   };
 
   useEffect(() => {
+    fetchTournamentList();
     fetchObject();
   }, []);
 
@@ -126,7 +136,7 @@ export default function RankingsDisplay() {
       <div className='flex max-w-[712px] items-center justify-between'>
         <RankingsButton name={'Global'} />
         <RankingsButton name={'Team'} />
-        <Dropdown buttonName={'Tournament'} options={tournamentOptions} />
+        <Dropdown buttonName={'Tournament'} options={tournamentList} />
       </div>
 
       <table className='w-full text-left font-sans'>

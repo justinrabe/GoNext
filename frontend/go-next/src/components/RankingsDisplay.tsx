@@ -10,27 +10,7 @@ import RankingsButton from './RankingsButton';
 import { Team, Tournament } from '../types';
 import s3Client from '../utils/s3';
 import { ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
-
-const tournamentOptions: Tournament[] = [
-  {
-    name: 'LPL Spring 2023',
-    dateStart: new Date(),
-    dateEnd: new Date(),
-    id: '1234',
-  },
-  {
-    name: 'LCK Spring 2023',
-    dateStart: new Date(),
-    dateEnd: new Date(),
-    id: '5678',
-  },
-  {
-    name: 'LCK Spring 2023',
-    dateStart: new Date(),
-    dateEnd: new Date(),
-    id: '0101',
-  },
-];
+import jsonToFormattedName from '../utils/jsonToFormattedName';
 
 const columnHelper = createColumnHelper<Team>();
 const columns = [
@@ -64,12 +44,11 @@ export default function RankingsDisplay() {
 
     try {
       const data = await s3Client.send(command);
-      console.log(data.Contents);
 
-      const newTournamentList = data.Contents.map((tournament) => {
+      const newTournamentList = data.Contents!.map((tournament) => {
         return {
           id: tournament.Key,
-          name: tournament.Key,
+          name: jsonToFormattedName(tournament.Key),
           value: tournament.Key,
         };
       });

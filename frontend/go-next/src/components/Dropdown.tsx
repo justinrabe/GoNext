@@ -65,7 +65,7 @@ export default function Dropdown({
         <div
           className={`${
             isOpen ? 'visible' : 'invisible'
-          } absolute z-10 w-full translate-y-[55%] list-none overflow-auto overflow-x-hidden border bg-white`}
+          } absolute z-10 w-full translate-y-[55%] list-none overflow-auto overflow-x-hidden border border-gold2 bg-white`}
         >
           {options.map((op) => {
             return (
@@ -73,7 +73,7 @@ export default function Dropdown({
                 className='w-full px-8 py-4 hover:bg-stone-300'
                 key={op.name}
                 onClick={handleOptionClick}
-                value={op.name}
+                value={op.value}
               >
                 {op.name}
               </li>

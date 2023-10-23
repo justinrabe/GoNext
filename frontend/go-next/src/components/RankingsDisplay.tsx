@@ -200,6 +200,7 @@ const TeamDropdown = ({ regions, teams }: TeamDropdownProps) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false); // Close the dropdown if click is outside of the dropdown container
       }
+      console.log(event.target.value);
     };
 
     // Attach the click event listener
@@ -229,15 +230,21 @@ const TeamDropdown = ({ regions, teams }: TeamDropdownProps) => {
                       .filter((t) => t.region === r)
                       .map((team) => {
                         return (
-                          <label key={team.id}>
+                          <div
+                            key={team.id}
+                            className='flex items-center gap-2'
+                          >
                             <input
                               type='checkbox'
-                              name='selectedTeams'
+                              name={team.team_name}
                               value={team.team_name}
                               onClick={handleCheckboxClick}
+                              className='h-4 w-4 rounded border-4 border-neutral-600'
                             />
-                            {team.team_name}
-                          </label>
+                            <label htmlFor={team.team_name}>
+                              {team.team_name}
+                            </label>
+                          </div>
                         );
                       })}
                   </div>

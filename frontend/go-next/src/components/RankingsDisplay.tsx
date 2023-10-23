@@ -218,33 +218,37 @@ const TeamDropdown = ({ regions, teams }: TeamDropdownProps) => {
       </button>
 
       {isOpen && (
-        <div className='absolute z-10 grid w-[1017px] grid-cols-2 border border-gold2 bg-white p-12'>
-          {regions.map((r) => {
-            return (
-              <div key={r}>
-                <h2 className='font-bold text-zinc-700'>{r}</h2>
-                <div className='grid grid-cols-2'>
-                  {teams
-                    .filter((t) => t.region === r)
-                    .map((team) => {
-                      return (
-                        <label key={team.id}>
-                          <input
-                            type='checkbox'
-                            name='selectedTeams'
-                            value={team.team_name}
-                            onClick={handleCheckboxClick}
-                          />
-                          {team.team_name}
-                        </label>
-                      );
-                    })}
+        <div className='absolute z-10 w-[1017px]  border border-gold2 bg-white p-12'>
+          <div className='grid grid-cols-2'>
+            {regions.map((r) => {
+              return (
+                <div key={r}>
+                  <h2 className='font-bold text-zinc-700'>{r}</h2>
+                  <div className='grid grid-cols-2'>
+                    {teams
+                      .filter((t) => t.region === r)
+                      .map((team) => {
+                        return (
+                          <label key={team.id}>
+                            <input
+                              type='checkbox'
+                              name='selectedTeams'
+                              value={team.team_name}
+                              onClick={handleCheckboxClick}
+                            />
+                            {team.team_name}
+                          </label>
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
 
-          <div>
+          <hr className='my-8 border-grey' />
+
+          <div className='flex w-full justify-end gap-6'>
             <Button type='secondary'>Reset</Button>
             <Button type='primary'>Compare</Button>
           </div>

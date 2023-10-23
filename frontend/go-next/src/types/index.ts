@@ -2,7 +2,7 @@ export type Team = {
   id: string;
   team_name: string;
   rank: number;
-  region: null;
+  region: string;
   elo: number;
 };
 

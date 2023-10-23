@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <div className='flex w-full flex-col items-center justify-center bg-blue5 px-60 py-20 text-center '>
+    <div className='flex w-full flex-col items-center justify-center bg-blue5 px-60 py-20 text-center'>
       <h1 className='font-display text-2xl font-medium uppercase text-gold4'>
         Global Power Rankings
       </h1>

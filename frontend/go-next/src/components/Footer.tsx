@@ -21,7 +21,7 @@ export default function Footer() {
             placeholder='Email address'
             className='w-[300px] rounded border border-grey bg-transparent px-4 py-2'
           />
-          <Button>Sign Up</Button>
+          <Button type='primary'>Sign Up</Button>
         </div>
       </div>
       <hr className='my-8 border-grey' />

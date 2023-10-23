@@ -36,7 +36,7 @@ const columns = [
 
 export default function RankingsDisplay() {
   const [data, setData] = useState<Array<Team>>([]);
-  const [tournamentList, setTournamentList] = useState([]);
+  const [tournamentList, setTournamentList] = useState<Tournament[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
@@ -49,13 +49,14 @@ export default function RankingsDisplay() {
     try {
       const data = await s3Client.send(command);
 
-      const newTournamentList = data.Contents!.map((tournament) => {
-        return {
-          id: tournament.Key,
-          name: jsonToFormattedName(tournament.Key),
-          value: tournament.Key,
-        };
-      });
+      const newTournamentList: { id: string; name: string; value: string }[] =
+        data.Contents!.map((tournament) => {
+          return {
+            id: tournament.Key!,
+            name: jsonToFormattedName(tournament.Key!),
+            value: tournament.Key!,
+          };
+        });
 
       console.log(newTournamentList);
       setTournamentList(newTournamentList);
@@ -128,8 +129,9 @@ export default function RankingsDisplay() {
     console.log('delete me');
   };
 
-  const handleTournamentOptionClick = (e) => {
-    const optionBucketKey = e.target.getAttribute('value');
+  const handleTournamentOptionClick = (optionBucketKey: string) => {
+    // console.log(e);
+    // const optionBucketKey = e.target.getAttribute('value');
     fetchObject(optionBucketKey);
   };
 

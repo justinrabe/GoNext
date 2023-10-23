@@ -43,11 +43,22 @@ export default function Dropdown({
     };
   }, []); // Empty dependency array means this effect will only run once, similar to componentDidMount
 
-  const handleOptionClick = (name: string) => {
-    // Pass the selected option's name up to the parent component
-    onOptionClick(name);
-    // Close the dropdown when an option is clicked
-    setIsOpen(false);
+  // const handleOptionClick = (name: string) => {
+  //   // Pass the selected option's name up to the parent component
+  //   onOptionClick(name);
+  //   // Close the dropdown when an option is clicked
+  //   setIsOpen(false);
+  // };
+
+  const handleOptionClick = (event: React.MouseEvent<HTMLLIElement>) => {
+    const selectedValue = event.currentTarget.getAttribute('value');
+    if (selectedValue) {
+      console.log(selectedValue);
+      // Pass the selected value to the onOptionClick function
+      onOptionClick(selectedValue);
+      // Close the dropdown when an option is clicked
+      setIsOpen(false);
+    }
   };
 
   return (

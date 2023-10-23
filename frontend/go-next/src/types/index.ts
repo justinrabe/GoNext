@@ -8,7 +8,6 @@ export type Team = {
 
 export type Tournament = {
   name: string;
-  dateStart: Date;
-  dateEnd: Date;
   id: string;
+  value: string;
 };

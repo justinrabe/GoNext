@@ -19,11 +19,15 @@ export default function TeamDropdown({
 }: TeamDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [checkedTeams, setCheckedTeams] = useState<Team[]>([]);
-  const dropdownRef = useRef(null);
+
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as Node).contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };

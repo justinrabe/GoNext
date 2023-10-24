@@ -74,9 +74,7 @@ export default function Dropdown({
 
       {isOpen && (
         <div
-          className={`${
-            isOpen ? 'visible' : 'invisible'
-          } absolute z-10 w-full translate-y-[55%] list-none overflow-auto overflow-x-hidden border border-gold2 bg-white`}
+          className={` absolute z-10 w-full translate-y-[55%] list-none overflow-auto overflow-x-hidden border border-gold2 bg-white`}
         >
           {options.map((op) => {
             return (

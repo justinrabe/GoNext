@@ -14,7 +14,7 @@ export default function Hero2() {
           A backstage pass to the epic saga of champions, rivalries, and epic
           fails – all in glorious data-driven detail!
         </p>
-        <Button type='primary'>Get Started</Button>
+        <Button style='primary'>Get Started</Button>
       </div>
       <img src='/assets/hero-image.jpeg' className='w-[50%]' />
     </div>

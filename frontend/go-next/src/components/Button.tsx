@@ -7,7 +7,12 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-export default function Button({ children, style, type }: ButtonProps) {
+export default function Button({
+  children,
+  style,
+  type,
+  onClick,
+}: ButtonProps) {
   const buttonStyle =
     style === 'primary'
       ? ' bg-teal text-white'
@@ -21,6 +26,7 @@ export default function Button({ children, style, type }: ButtonProps) {
     <button
       className={`rounded px-4 py-2 font-bold uppercase ${buttonStyle}`}
       type={buttonType}
+      onClick={onClick}
     >
       {children}
     </button>

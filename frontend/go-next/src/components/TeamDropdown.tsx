@@ -1,62 +1,79 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Team } from '../types';
 import Button from './Button';
 
 interface TeamDropdownProps {
   regions: string[];
   teams: Team[];
+  selectedTeams: Team[];
+  onReset: () => void;
+  onCompare: (teamList: Team[]) => void;
 }
 
-export default function TeamDropdown({ regions, teams }: TeamDropdownProps) {
+export default function TeamDropdown({
+  regions,
+  teams,
+  selectedTeams,
+  onReset,
+  onCompare,
+}: TeamDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [checkedTeams, setCheckedTeams] = useState<Team[]>([]);
 
-  const toggleDropdown = () => {
+  const handleButtonClick = () => {
     setIsOpen(!isOpen);
   };
 
   const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation();
     const teamName = e.currentTarget.value;
-    console.log(teamName);
+    const isChecked = e.currentTarget.checked;
 
-    // Check if the teamName is already in the selectedTeams array
-    if (selectedTeams.includes(teamName)) {
-      // If it is, remove it
-      setSelectedTeams((prevSelectedTeams) =>
-        prevSelectedTeams.filter((name) => name !== teamName),
-      );
-    } else {
-      // If it isn't, add it
-      setSelectedTeams((prevSelectedTeams) => [...prevSelectedTeams, teamName]);
-      console.log(selectedTeams);
-    }
+    setCheckedTeams((prevSelectedTeams) => {
+      if (isChecked) {
+        // If the checkbox is checked, add the team if not already in the list
+        if (!prevSelectedTeams.some((team) => team.team_name === teamName)) {
+          return [
+            ...prevSelectedTeams,
+            teams.find((team) => team.team_name === teamName)!,
+          ];
+        }
+      } else {
+        // If the checkbox is unchecked, remove the team if it's in the list
+        return prevSelectedTeams.filter((team) => team.team_name !== teamName);
+      }
+
+      return prevSelectedTeams;
+    });
+  };
+
+  const handleResetClick = () => {
+    console.log('reset called');
+    // Clear the checkedTeams array
+    setCheckedTeams([]);
+
+    // Uncheck all checkboxes by resetting their checked state
+    const checkboxes = document.querySelectorAll<HTMLInputElement>(
+      'input[type="checkbox"]',
+    );
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+    setIsOpen(false);
+    onReset();
   };
 
   const handleCompareClick = () => {
-    // Log the selected teams to the console
-    console.log('Selected Teams:', selectedTeams);
+    console.log(checkedTeams);
+    setIsOpen(false);
+    onCompare(checkedTeams);
   };
 
-  useEffect(() => {
-    const handleDocumentClick = (event: { target: any }) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleDocumentClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
-    };
-  }, []);
-
   return (
-    <div onClick={toggleDropdown} className='relative' ref={dropdownRef}>
-      {selectedTeams}
-      <button className=' px-3 font-display text-[20px] font-medium uppercase text-gold4'>
+    <div className='relative'>
+      <button
+        onClick={handleButtonClick} // Toggle the dropdown when the button is clicked
+        className='px-3 font-display text-[20px] font-medium uppercase text-gold4'
+      >
         Team
       </button>
 
@@ -98,7 +115,9 @@ export default function TeamDropdown({ regions, teams }: TeamDropdownProps) {
           <hr className='my-8 border-grey' />
 
           <div className='flex w-full justify-end gap-6'>
-            <Button style='secondary'>Reset</Button>
+            <Button style='secondary' onClick={handleResetClick}>
+              Reset
+            </Button>
             <Button style='primary' onClick={handleCompareClick}>
               Compare
             </Button>

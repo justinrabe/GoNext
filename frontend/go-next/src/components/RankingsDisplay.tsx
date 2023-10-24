@@ -35,10 +35,12 @@ const columns = [
 ];
 
 export default function RankingsDisplay() {
-  const [data, setData] = useState<Array<Team>>([]);
+  const [data, setData] = useState<Team[]>([]);
+  const [originalData, setOriginalData] = useState<Team[]>([]);
   const [tournamentList, setTournamentList] = useState<Tournament[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
+  const [selectedTeams, setSelectedTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTournamentList = async () => {
@@ -73,13 +75,12 @@ export default function RankingsDisplay() {
 
     try {
       const data = await s3Client.send(command);
-      // Convert the readable stream to text
       const objectData = await streamToString(data.Body as ReadableStream);
-      // Now parse the text as JSON
       const jsonData = JSON.parse(objectData);
       console.log(jsonData);
 
       setData(jsonData);
+      setOriginalData(jsonData);
 
       const regionList = (): string[] => {
         const uniqueRegions = new Set<string>();
@@ -90,13 +91,6 @@ export default function RankingsDisplay() {
       };
       setRegions(regionList());
 
-      // const teamList = (): string[] => {
-      //   const uniqueTeams = new Set<string>();
-      //   jsonData.forEach((team: Team) => {
-      //     if (team.team_name) uniqueTeams.add(team.team_name);
-      //   });
-      //   return Array.from(uniqueTeams);
-      // };
       setTeams(jsonData);
 
       setLoading(false);
@@ -105,7 +99,6 @@ export default function RankingsDisplay() {
       console.error(error);
     }
   };
-
   useEffect(() => {
     fetchTournamentList();
     fetchObject('final_global_rankings.json');
@@ -118,7 +111,7 @@ export default function RankingsDisplay() {
   });
 
   const evenRowBg = (index: number): string => {
-    return index % 2 == 0 ? 'bg-white' : 'bg-gold1 border border-gold2';
+    return index % 2 === 0 ? 'bg-white' : 'bg-gold1 border border-gold2';
   };
 
   const handleGlobalBtnClick = () => {
@@ -126,16 +119,32 @@ export default function RankingsDisplay() {
   };
 
   const handleTournamentOptionClick = (optionBucketKey: string) => {
-    // console.log(e);
-    // const optionBucketKey = e.target.getAttribute('value');
     fetchObject(optionBucketKey);
+  };
+
+  const handleOnReset = () => {
+    setData(originalData);
+  };
+
+  // Callback function to receive selected teams from TeamDropdown
+  const handleOnCompare = (checkedTeams: Team[]) => {
+    const filteredData = data.filter((team) => {
+      return checkedTeams.some((t) => t.team_name === team.team_name);
+    });
+    setData(filteredData);
   };
 
   return (
     <div className='w-full bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
       <div className='flex max-w-[712px] items-center justify-between'>
         <RankingsButton name={'Global'} onClick={handleGlobalBtnClick} />
-        <TeamDropdown regions={regions} teams={teams} />
+        <TeamDropdown
+          regions={regions}
+          teams={teams}
+          selectedTeams={selectedTeams}
+          onReset={handleOnReset}
+          onCompare={handleOnCompare} // Pass the callback function
+        />
         <Dropdown
           buttonName={'Tournament'}
           options={tournamentList}

@@ -108,16 +108,20 @@ export default function TeamDropdown({
                         return (
                           <div
                             key={team.id}
-                            className='flex items-center gap-2'
+                            className='flex items-center gap-2 '
                           >
                             <input
                               type='checkbox'
+                              id={team.team_name}
                               name={team.team_name}
                               value={team.team_name}
                               onClick={handleCheckboxClick}
-                              className='h-4 w-4 rounded border-4 border-neutral-600 hover:cursor-pointer'
+                              className='h-4 w-4 rounded border-4 border-neutral-600 '
                             />
-                            <label htmlFor={team.team_name}>
+                            <label
+                              htmlFor={team.team_name}
+                              className='hover:cursor-pointer'
+                            >
                               {team.team_name}
                             </label>
                           </div>

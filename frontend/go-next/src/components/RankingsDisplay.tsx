@@ -12,7 +12,7 @@ import s3Client from '../utils/s3';
 import { ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
 import jsonToFormattedName from '../utils/jsonToFormattedName';
 import streamToString from '../utils/streamToString';
-import Button from './Button';
+import TeamDropdown from './TeamDropdown';
 
 const columnHelper = createColumnHelper<Team>();
 const columns = [
@@ -35,10 +35,12 @@ const columns = [
 ];
 
 export default function RankingsDisplay() {
-  const [data, setData] = useState<Array<Team>>([]);
+  const [data, setData] = useState<Team[]>([]);
+  const [originalData, setOriginalData] = useState<Team[]>([]);
   const [tournamentList, setTournamentList] = useState<Tournament[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
+  const [selectedTeams, setSelectedTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTournamentList = async () => {
@@ -73,13 +75,12 @@ export default function RankingsDisplay() {
 
     try {
       const data = await s3Client.send(command);
-      // Convert the readable stream to text
       const objectData = await streamToString(data.Body as ReadableStream);
-      // Now parse the text as JSON
       const jsonData = JSON.parse(objectData);
       console.log(jsonData);
 
       setData(jsonData);
+      setOriginalData(jsonData);
 
       const regionList = (): string[] => {
         const uniqueRegions = new Set<string>();
@@ -90,13 +91,6 @@ export default function RankingsDisplay() {
       };
       setRegions(regionList());
 
-      // const teamList = (): string[] => {
-      //   const uniqueTeams = new Set<string>();
-      //   jsonData.forEach((team: Team) => {
-      //     if (team.team_name) uniqueTeams.add(team.team_name);
-      //   });
-      //   return Array.from(uniqueTeams);
-      // };
       setTeams(jsonData);
 
       setLoading(false);
@@ -105,7 +99,6 @@ export default function RankingsDisplay() {
       console.error(error);
     }
   };
-
   useEffect(() => {
     fetchTournamentList();
     fetchObject('final_global_rankings.json');
@@ -118,28 +111,40 @@ export default function RankingsDisplay() {
   });
 
   const evenRowBg = (index: number): string => {
-    return index % 2 == 0 ? 'bg-white' : 'bg-gold1 border border-gold2';
+    return index % 2 === 0 ? 'bg-white' : 'bg-gold1 border border-gold2';
   };
 
   const handleGlobalBtnClick = () => {
     fetchObject('final_global_rankings.json');
   };
 
-  const handleTeamBtnClick = () => {
-    console.log('delete me');
+  const handleTournamentOptionClick = (optionBucketKey: string) => {
+    fetchObject(optionBucketKey);
   };
 
-  const handleTournamentOptionClick = (optionBucketKey: string) => {
-    // console.log(e);
-    // const optionBucketKey = e.target.getAttribute('value');
-    fetchObject(optionBucketKey);
+  const handleOnReset = () => {
+    setData(originalData);
+  };
+
+  // Callback function to receive selected teams from TeamDropdown
+  const handleOnCompare = (checkedTeams: Team[]) => {
+    const filteredData = data.filter((team) => {
+      return checkedTeams.some((t) => t.team_name === team.team_name);
+    });
+    setData(filteredData);
   };
 
   return (
     <div className='w-full bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
       <div className='flex max-w-[712px] items-center justify-between'>
         <RankingsButton name={'Global'} onClick={handleGlobalBtnClick} />
-        <TeamDropdown regions={regions} teams={teams} />
+        <TeamDropdown
+          regions={regions}
+          teams={teams}
+          selectedTeams={selectedTeams}
+          onReset={handleOnReset}
+          onCompare={handleOnCompare} // Pass the callback function
+        />
         <Dropdown
           buttonName={'Tournament'}
           options={tournamentList}
@@ -179,90 +184,3 @@ export default function RankingsDisplay() {
     </div>
   );
 }
-
-interface TeamDropdownProps {
-  regions: string[];
-  teams: Team[];
-}
-
-const TeamDropdown = ({ regions, teams }: TeamDropdownProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null); // Create a ref for the dropdown container
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation(); // Prevent the click event from propagating to the parent (TeamDropdown)
-  };
-
-  useEffect(() => {
-    const handleDocumentClick = (event: { target: any }) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false); // Close the dropdown if click is outside of the dropdown container
-      }
-      console.log(event.target.value);
-    };
-
-    // Attach the click event listener
-    document.addEventListener('mousedown', handleDocumentClick);
-
-    // Cleanup - remove the listener when the component unmounts
-    return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
-    };
-  }, []);
-
-  return (
-    <div onClick={toggleDropdown} className='relative' ref={dropdownRef}>
-      <button className=' px-3 font-display text-[20px] font-medium uppercase text-gold4'>
-        Team
-      </button>
-
-      {isOpen && (
-        <div className='absolute z-10 w-[1017px]  border border-gold2 bg-white p-12'>
-          <div className='grid grid-cols-2'>
-            {regions.map((r) => {
-              return (
-                <div key={r}>
-                  <h2 className='font-bold text-zinc-700'>{r}</h2>
-                  <div className='grid grid-cols-2'>
-                    {teams
-                      .filter((t) => t.region === r)
-                      .map((team) => {
-                        return (
-                          <div
-                            key={team.id}
-                            className='flex items-center gap-2'
-                          >
-                            <input
-                              type='checkbox'
-                              name={team.team_name}
-                              value={team.team_name}
-                              onClick={handleCheckboxClick}
-                              className='h-4 w-4 rounded border-4 border-neutral-600'
-                            />
-                            <label htmlFor={team.team_name}>
-                              {team.team_name}
-                            </label>
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <hr className='my-8 border-grey' />
-
-          <div className='flex w-full justify-end gap-6'>
-            <Button type='secondary'>Reset</Button>
-            <Button type='primary'>Compare</Button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};

@@ -1,14 +1,3 @@
-# import json
-# region_map = {}
-
-# with open("sample_global_rankings.json", "r") as json_file:
-# data = json.load(json_file)
-
-# for i in data:
-# region_map[i["team_name"]] = None
-
-
-# print(region_map)
 region_map = {
     "Gen.G": "LCK",
     "Beijing JDG Intel Esports Club": "LPL",

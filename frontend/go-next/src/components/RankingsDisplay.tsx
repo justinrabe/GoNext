@@ -135,52 +135,54 @@ export default function RankingsDisplay() {
   };
 
   return (
-    <div className='w-full bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
-      <div className='flex max-w-[712px] items-center justify-between'>
-        <RankingsButton name={'Global'} onClick={handleGlobalBtnClick} />
-        <TeamDropdown
-          regions={regions}
-          teams={teams}
-          selectedTeams={selectedTeams}
-          onReset={handleOnReset}
-          onCompare={handleOnCompare} // Pass the callback function
-        />
-        <Dropdown
-          buttonName={'Tournament'}
-          options={tournamentList}
-          onOptionClick={handleTournamentOptionClick}
-        />
-      </div>
+    <div className='flex w-full flex-col items-center bg-marble bg-cover px-[60px] pb-[58px] pt-[58px]'>
+      <div className='w-full max-w-[1600px]'>
+        <div className='flex max-w-[712px] items-center justify-between'>
+          <RankingsButton name={'Global'} onClick={handleGlobalBtnClick} />
+          <TeamDropdown
+            regions={regions}
+            teams={teams}
+            selectedTeams={selectedTeams}
+            onReset={handleOnReset}
+            onCompare={handleOnCompare} // Pass the callback function
+          />
+          <Dropdown
+            buttonName={'Tournament'}
+            options={tournamentList}
+            onOptionClick={handleTournamentOptionClick}
+          />
+        </div>
 
-      <table className='w-full text-left font-sans'>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className='p-7 uppercase text-[#555555]'>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody className='border border-gold2'>
-          {table.getRowModel().rows.map((row, index) => (
-            <tr key={row.id} className={`${evenRowBg(index)}`}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className='p-7'>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <table className='w-full text-left font-sans'>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className='p-7 uppercase text-[#555555]'>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody className='border border-gold2'>
+            {table.getRowModel().rows.map((row, index) => (
+              <tr key={row.id} className={`${evenRowBg(index)}`}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className='p-7'>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

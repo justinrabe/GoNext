@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Team } from '../types';
 import Button from './Button';
 
@@ -19,6 +19,23 @@ export default function TeamDropdown({
 }: TeamDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [checkedTeams, setCheckedTeams] = useState<Team[]>([]);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Add event listener when the component mounts
+    window.addEventListener('click', handleClickOutside);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
@@ -69,7 +86,7 @@ export default function TeamDropdown({
   };
 
   return (
-    <div className='relative'>
+    <div className='relative' ref={dropdownRef}>
       <button
         onClick={handleButtonClick} // Toggle the dropdown when the button is clicked
         className='px-3 font-display text-[20px] font-medium uppercase text-gold4'

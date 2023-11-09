@@ -38,8 +38,10 @@ export default function Footer() {
         </div>
         <div className='flex w-[17rem] flex-col'>
           <h1 className='font-semibold'>Resources</h1>
-          <a href='#'>Technical Documentation</a>
-          <a href='#'>Source Code</a>
+          <a href='https://github.com/justinrabe/GoNext'>
+            Technical Documentation
+          </a>
+          <a href='https://github.com/justinrabe/GoNext'>Source Code</a>
         </div>
       </div>
 

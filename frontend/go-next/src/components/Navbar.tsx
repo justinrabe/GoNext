@@ -10,9 +10,11 @@ export default function Navbar() {
         <img src='/assets/go-next-logo.png' className='ml-[40px] w-[160px]' />
         <nav className='ml-[40px]'>
           <ul className='flex flex-col gap-x-10 text-white md:flex-row'>
-            <NavLink>Home</NavLink>
-            <NavLink>About Us</NavLink>
-            <NavLink>Documentation</NavLink>
+            <NavLink href='/'>Home</NavLink>
+            <NavLink href='/'>About Us</NavLink>
+            <NavLink href='https://github.com/justinrabe/GoNext'>
+              Documentation
+            </NavLink>
           </ul>
         </nav>
       </header>
@@ -20,10 +22,10 @@ export default function Navbar() {
   );
 }
 
-function NavLink({ children }: { children: ReactNode }) {
+function NavLink({ children, href }: { children: ReactNode; href: string }) {
   return (
     <li className='hover:cursor-pointer'>
-      <a href='/'>{children}</a>
+      <a href={href}>{children}</a>
     </li>
   );
 }

@@ -9,8 +9,9 @@ The Backend folder houses the Python application that generates and analyzes the
 Our ELO system excels at recognizing and rewarding teams for their significant achievements. This encompasses victories in crucial matches and triumphs over opponents expected to outperform them. Our ELO system is able to weed out teams that beat "bad" teams and rewards teams that beat "good" teams.
 
 For every matchup, we calculate the ELO by pinning the two teams using this formula:
+```
 Expected_Outcome = 1 (1 + 10**((opponent_rating - player_rating) / 400))
-
+```
 The rating gain is weighted, meaning that when a weaker (“bad”) team beats a stronger (“good”) team, the “bad” team will receive a larger point increase.
 Similarly, when a “good” team beats a “bad” team, they still gain points but to a lesser extent.
 
